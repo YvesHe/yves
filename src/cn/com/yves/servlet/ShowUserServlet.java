@@ -36,6 +36,8 @@ public class ShowUserServlet extends HttpServlet {
 		UserBean userBean = userService.showUserInfo("1");
 		System.out.println(userBean.getUserName());
 		request.setAttribute("userBean", userBean);
-		response.sendRedirect("/yves/pages/testRedirect.jsp");
+		response.sendRedirect("pages/testRedirect.jsp");
+		// request.getRequestDispatcher("pages/testForward.jsp").forward(request,
+		// response);
 	}
 }

@@ -1,6 +1,5 @@
 package cn.com.yves.bean;
 
-import java.lang.reflect.Method;
 
 public class UserBean {
 	private String userId;

@@ -30,23 +30,9 @@
 	testForward.jsp
 	<%
 		UserBean userBean = (UserBean) request.getAttribute("userBean");
-		String yves = "何宇yves";
-		int result  = 1;
-		if(userBean == null){
-			result = -1;
-		}
 	%>
-
-
-	<input type="button" value="点击我" onclick="alert(1);alerMessage();">
+	<input type="text" value="<%=userBean.getUserName()%>">
 	<br>
-	<script type="text/javascript">
-		function alerMessage() {
-			var message ="<%=yves%>";
-			var num = "<%=result%>";
-			alert(num);
-		}
-	</script>
 
 </body>
 </html>
