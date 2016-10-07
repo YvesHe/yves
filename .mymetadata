@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="1yves"
+  id="myeclipse.1475771640919"
+  context-root="/yves"
+  j2ee-spec="5.0"
+  archive="1yves.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
