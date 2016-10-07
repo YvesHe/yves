@@ -6,5 +6,4 @@
 *.swo
 
 #for java 
-*.classpath
 *.class
