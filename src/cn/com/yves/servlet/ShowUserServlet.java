@@ -30,11 +30,12 @@ public class ShowUserServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+
 		UserService userService = new UserService();
 		UserBean userBean = userService.showUserInfo("1");
 		System.out.println(userBean.getUserName());
 		request.setAttribute("userBean", userBean);
-		request.
+		response.sendRedirect("/yves/pages/testRedirect.jsp");
 	}
 }
