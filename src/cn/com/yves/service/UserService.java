@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import cn.com.yves.bean.UserBean;
 import cn.com.yves.dao.impl.UserDao;
 
-public class Service {
+public class UserService {
 
 	private UserDao uDao = new UserDao();
 

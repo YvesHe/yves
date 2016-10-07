@@ -46,7 +46,7 @@ public class UserDao implements UserDaoInf {
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		UserBean uBean = null;
-		String sql = "select * from t_user where id = ?";
+		String sql = "select * from t_user where userId = ?";
 		try {
 			conn = DBUtill.getConnection();
 			pstm = conn.prepareStatement(sql);
@@ -94,7 +94,7 @@ public class UserDao implements UserDaoInf {
 		boolean bool = false;
 		Connection conn = null;
 		PreparedStatement pstm = null;
-		final String sql = "delete from t_user where id=?";
+		final String sql = "delete from t_user where userId=?";
 		try {
 			conn = DBUtill.getConnection();
 			pstm = conn.prepareStatement(sql);
@@ -156,7 +156,7 @@ public class UserDao implements UserDaoInf {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		String sql = "select * from t_user where id = ?";
+		String sql = "select * from t_user where userId = ?";
 		try {
 			conn = DBUtill.getConnection();
 			pstm = conn.prepareStatement(sql);
