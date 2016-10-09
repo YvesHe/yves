@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ page import="cn.com.yves.bean.UserBean"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -12,7 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>My JSP 'testForward.jsp' starting page</title>
+<title>My JSP 'forwardShow.jsp' starting page</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -26,27 +25,25 @@
 </head>
 
 <body>
-	<input type="text" value="<%=basePath%>"> This is
-	testRedirect.jsp
 	<%
-		UserBean userBean = (UserBean) request.getAttribute("userBean");
-		String yves = "何宇yves";
-		int result  = 1;
-		if(userBean == null){
-			result = -1;
-		}
+		String att1 = (String)request.getAttribute("att1");
+		System.out.println(att1);
+		String text1 = request.getParameter("text1");
+		System.out.println(text1);
 	%>
-
-
-	<input type="button" value="点击我" onclick="alert(1);alerMessage();">
-	<br>
-	<script type="text/javascript">
-		function alerMessage() {
-			var message ="<%=yves%>";
-			var num = "<%=result%>";
-			alert(num);
-		}
-	</script>
-
+	
+	<div id="divShow"></div>
+	<div id="divShow2"></div>
+	<input type="button" onclick="showData();" value="显示数据">
 </body>
+<script type="text/javascript">
+	var text1 = "<%=text1%>";
+	var att1 = "<%=att1%>";
+	
+	function showData(){
+		document.getElementById("divShow").innerHTML=text1;
+		document.getElementById("divShow2").innerHTML=att1;
+	}
+
+</script>
 </html>

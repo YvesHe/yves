@@ -1,7 +1,6 @@
 package cn.com.yves.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -36,8 +35,11 @@ public class ShowUserServlet extends HttpServlet {
 		UserBean userBean = userService.showUserInfo("1");
 		System.out.println(userBean.getUserName());
 		request.setAttribute("userBean", userBean);
-		response.sendRedirect("pages/testRedirect.jsp");
-		// request.getRequestDispatcher("pages/testForward.jsp").forward(request,
-		// response);
+		// 重定向数据是否丢失？
+		String heyu = (String) request.getAttribute("name");
+		// response.sendRedirect("pages/testRedirect.jsp");
+		request.getRequestDispatcher("pages/testForward.jsp").forward(request,
+				response);
+
 	}
 }

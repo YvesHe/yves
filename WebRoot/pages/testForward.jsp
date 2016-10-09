@@ -30,9 +30,30 @@
 	testForward.jsp
 	<%
 		UserBean userBean = (UserBean) request.getAttribute("userBean");
+		String yves = "何宇yves";
+		int result  = 1;
+		if(userBean == null){
+			result = -1;
+		}
+		//上一个页面经过多次的转发后，在发送到jsp，request里面的request.getAttribute  和request.getParameter（）的区别
+		String text1 = request.getParameter("text1");
+		System.out.print(text1);
+
 	%>
-	<input type="text" value="<%=userBean.getUserName()%>">
+
+
+	<input type="button" value="点击我" onclick="alert(1);alerMessage();">
 	<br>
+	<script type="text/javascript">
+		
+		function alerMessage() {
+			var message ="<%=yves%>";
+			var num = "<%=result%>";
+			var text1 = "<%=text1%>";
+			alert(text1);
+			alert(num);
+		}
+	</script>
 
 </body>
 </html>

@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ page import="cn.com.yves.bean.UserBean"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -12,7 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>My JSP 'testForward.jsp' starting page</title>
+<title>My JSP 'dataForm.jsp' starting page</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -26,27 +25,19 @@
 </head>
 
 <body>
-	<input type="text" value="<%=basePath%>"> This is
-	testRedirect.jsp
-	<%
-		UserBean userBean = (UserBean) request.getAttribute("userBean");
-		String yves = "何宇yves";
-		int result  = 1;
-		if(userBean == null){
-			result = -1;
-		}
-	%>
-
-
-	<input type="button" value="点击我" onclick="alert(1);alerMessage();">
-	<br>
-	<script type="text/javascript">
-		function alerMessage() {
-			var message ="<%=yves%>";
-			var num = "<%=result%>";
-			alert(num);
-		}
-	</script>
-
+	<form id="myForm" action="forward">
+		<input type="text" name="text1">
+		<br>
+		<input type="text" name="text2">
+		<br>
+		<div id="div1"></div>
+		<button onclick="submitForm()">提交</button>
+	</form>
 </body>
+
+<script type="text/javascript">
+	function submitForm() {
+		document.getElementById("myForm").submit();
+	}
+</script>
 </html>

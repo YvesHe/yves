@@ -28,28 +28,65 @@
 		<servlet-name>ShowUserServlet</servlet-name>
 		<servlet-class>cn.com.yves.servlet.ShowUserServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>FormServlet</servlet-name>
+		<servlet-class>cn.com.yves.servlet.FormServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>Forward</servlet-name>
+		<servlet-class>cn.com.yves.servlet.Forward</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>ForWard2</servlet-name>
+		<servlet-class>cn.com.yves.servlet.forWard2</servlet-class>
+	</servlet>
+
+
+
+
 
 
 
 
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
-		<url-pattern>/LoginServlet</url-pattern>
+		<url-pattern>/loginServlet</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ReadXML</servlet-name>
-		<url-pattern>/ReadXML</url-pattern>
+		<url-pattern>/readXML</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ReadJson</servlet-name>
-		<url-pattern>/ReadJson</url-pattern>
+		<url-pattern>/readJson</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ShowUserServlet</servlet-name>
-		<url-pattern>/show</url-pattern>
+		<url-pattern>/showUserServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FormServlet</servlet-name>
+		<url-pattern>/formServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Forward</servlet-name>
+		<url-pattern>/forward</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ForWard2</servlet-name>
+		<url-pattern>/forWard2</url-pattern>
 	</servlet-mapping>
 
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+
+
+
 </web-app>
