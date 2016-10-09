@@ -25,14 +25,20 @@
 <body>
 	<form action="#">
 		<textarea id="showResult" rows="4" cols="8"></textarea>
-		</br> <span>UserName:</span> <input name="userName" type="text"> </br> <span>Password:</span><input
-			name="userPwd" type="password">
+		</br> <span>UserName:</span>
+		<input name="userName" type="text">
+		</br> <span>Password:</span>
+		<input name="userPwd" type="password">
 		<div id="divPwd" style="dispaly:inline"></div>
-		</br> <input type="reset" value="reset"> <input type="button"
-			value="login" onclick="ajaxLogin();"></br> <input type="button"
-			value="ajaxGet方式中文乱码" onclick=""></br> <input type="button"
-			value="ajax读取xml数据" onclick="readXMLData();"></br>
-			<button onclick="readJsonData();">ajax请求json数据</button>
+		</br>
+		<input type="reset" value="reset">
+		<input type="button" value="login" onclick="ajaxLogin();">
+		</br>
+		<input type="button" value="ajaxGet方式中文乱码" onclick="">
+		</br>
+		<input type="button" value="ajax读取xml数据" onclick="readXMLData();">
+		</br>
+		<button onclick="readJsonData();">ajax请求json数据</button>
 
 	</form>
 </body>
@@ -117,7 +123,7 @@
 					var result = request.responseText;
 					console.log(result);
 					//将json的字符串转换成json对象
-					var jsonObj = eval("(" +result+")");
+					var jsonObj = eval("(" + result + ")");
 					console.log(jsonObj);
 					var message = jsonObj[0].name;
 					showResult.value = message;

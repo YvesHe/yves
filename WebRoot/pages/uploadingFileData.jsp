@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'uploadingFile.jsp' starting page</title>
+    <title>My JSP 'uploadingFileData.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -22,16 +22,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   </head>
   
-  <body>
-  <form id="myForm" action="formServlet">
-  	<input type="text" name="text1">
-  	<input type="text" ><br>
-    <input type="file" name="file">
-    <input type="file" name="file">
-    <input type="file" name="file1">
-    <button onclick="document.getElementById('myForm').submit()">提交</button>
-   </form>
-   
-   
-  </body>
+<body>
+	<form  method="post"  id="myForm" action="uploadingFile" enctype="multipart/form-data">
+		<input type="file" name="text">
+		<br>
+		<input type="file" name="text1">
+		<br>
+		<input type="file" name="text1">
+		<br>
+		<input type="submit" value="提交">
+	</form>
+</body>
+
 </html>
