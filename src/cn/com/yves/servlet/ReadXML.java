@@ -33,6 +33,7 @@ public class ReadXML extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/xml;charset=UTF-8");
+
 		// send the data
 		PrintWriter pw = response.getWriter();
 		pw.write("<?xml version='1.0' encoding='UTF-8'?>");

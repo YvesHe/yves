@@ -1,0 +1,115 @@
+反射  （反射 类(class) 的构造函数 (constructor)、方法 (method)、字段 (field)）  实现功能：改变字段的值、呼叫方法、建立新的对象。
+1.基本步骤：
+第一步：获得你想操作的类的 java.lang.Class 对象。在运行中的 Java 程序中，用 java.lang.Class 类来描述类和接口等。
+第二步：调用诸如 getDeclaredMethods 的方法，以取得该类中定义的所有方法的列表。
+第三步：使用 reflection API 来操作这些信息。（比如获得了了Method对象，可以对method对象进行相应的操作，调用api里面的方法实现自己的操作。）
+EG：（一个小例子）
+	第一步：Class c = Class.forName("java.lang.String");
+	第二步：Method m[] = c.getDeclaredMethods();
+	第三步：System.out.println(m[0].toString());
+
+概念：
+反射机制（Reflection） 是 Java 程序开发语言的特征之一，它允许运行中的 Java 程序对自身进行检查，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法。
+这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制 
+
+
+功能：
+	在运行时判断任意一个对象所属的类；
+	在运行时构造任意一个类的对象；
+	在运行时判断任意一个类所具有的成员变量和方法；
+	在运行时调用任意一个对象的方法；
+
+
+Class类：
+1.介绍：
+Class类属于java.lang包，不需要使用import语句引入就可以使用，其对象代表一个类，携带类的相应信息，主要包括构造函数、方法、成员变量等。
+在Java中，每个类都有一个相应的Class对象。我们编写一个类，将其编译完成后，在生成的.class文件中，就会产生一个Class对象，用于表示这个类的类型信息 。
+2。Class的用法：
+public static void main(String[] args) {
+	Sample01 test = new Sample01();
+	// 通过getClass()方法获取
+	Class c1 = test.getClass();
+	System.out.println("c1: " + c1.getName());
+	// 通过forName()方法获取
+	Class c2 = Class.forName("com.demo.Sample01");
+	System.out.println("c2: " + c2.getName());
+	// 通过.class方式获取
+	Class c3 = Sample01.class;
+	System.out.println("c3: " + c3.getName()); 	
+} 
+
+
+
+Filed类的使用：
+class Student {
+	public int sage;// 年龄
+	private int sno;// 学号
+	public boolean gender;// 性别 true-男 false-女
+	public String sname;// 姓名
+	// 构造函数
+	public Student(int sage, int sno, boolean gender, String sname) {
+		this.sage = sage;
+		this.sno = sno;
+		this.gender = gender;
+		this.sname = sname;
+	}
+	// 创建Student类对象
+	Student tom = new Student(21, 10001, true, "Tom");
+	// 获取Student类对应的Class对象
+	Class dc = tom.getClass();
+	// 获取Student类所有可以访问的成员变量对应的Field数组
+	Field[] fieldArray = dc.getFields();
+	// 打印Student类对象各成员变量的详细信息
+	System.out.println("成员变量名\t成员变量类型\t\t成员变量值");
+	int size = fieldArray.length;
+	// 循环处理Field数组
+	for (int i = 0; i < size; i++) {
+	Field tempf = fieldArray[i];
+	// 打印成员变量名称
+	System.out.print(tempf.getName() + "\t\t");
+	// 打印成员变量类型
+	System.out.print(tempf.getType().toString());
+	// 打印成员变量值
+	System.out.println(tempf.get(tom));
+	} 
+}
+
+Method类的使用：
+//自定义用来测试的类
+class ForMethod {
+	// 声明静态方法sayHello，功能为在屏幕上打印字符串
+	public static void sayHello(String name) {
+		System.out.println("你好，" + name + "!!!");
+	}
+	// 声明非静态方法generateNum，功能为产生min与max之间的随机数
+	public String generateNum(int max, int min) {
+		return (Math.random() * (max - min) + min) + "";
+	}
+
+	ForMethod fm = new ForMethod();
+	// 获取ForMethod类对应的Class对象
+	Class fmc = fm.getClass();
+	// 获取可以访问的方法对应的Method数组
+	Method[] ma = fmc.getMethods();
+	// 通过反射调用静态方法sayHello
+	System.out.println("通过反射调用静态方法sayHell");
+	ma[0].invoke(null, new Object[] { "newer" });
+	// 通过反射调用非静态方法generateNum
+	System.out.println("通过反射调用非静态方法generateNum");
+	System.out.println(
+	ma[1].invoke(fm, new Object[] {new Integer(100), new Integer(1000) })                         
+	);
+
+}
+
+Constructor类的使用：
+// 使用反射调用有参构造函数创建对象
+Student stu = (Student)ca[0].newInstance(new Object[0]);
+// 调用创建对象的sayHello方法
+stu.sayHello();
+// 使用反射调用有参构造函数创建对象
+stu = (Student) ca[1].newInstance(new Object[] { "王强",new Integer(25) });
+// 调用创建对象的sayHello方法
+stu.sayHello();
+
+

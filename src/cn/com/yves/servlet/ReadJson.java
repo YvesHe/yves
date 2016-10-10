@@ -28,6 +28,7 @@ public class ReadJson extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
+
 		// send the data
 		String jsonData = "[{name:'heyu',sex: '男',age: 21},{name:'Jack',sex: '男',age: 22},{name:'rose',sex: '女',age: 21}]";
 		PrintWriter pw = response.getWriter();
