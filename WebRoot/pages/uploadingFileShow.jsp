@@ -11,7 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>My JSP 'uploadingFileData.jsp' starting page</title>
+<title>My JSP 'uploadingFileShow.jsp' starting page</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -25,16 +25,16 @@
 </head>
 
 <body>
-	<form method="post" id="myForm" action="uploadingFile" enctype="multipart/form-data">
-		<input type="text" name="text">
-		<input type="file" name="file">
-		<br>
-		<input type="file" name="file1">
-		<br>
-		<input type="file" name="file1">
-		<br>
-		<input type="submit" value="提交">
-	</form>
-</body>
+	This is show the uploadFile Result!
+	<%
+	//取值为null
+	String text = request.getParameter("text");
+	//取att1的值
+	String att1 = (String) request.getAttribute("att1");
+	%>
+	
+	<input type="text" value="<%=text%>">
+	<input type="text" value="<%=att1%>">
 
+</body>
 </html>
