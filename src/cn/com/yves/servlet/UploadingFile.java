@@ -30,6 +30,8 @@ public class UploadingFile extends HttpServlet {
 
 	private int count = 0;// 给循环设置参数。
 
+	private String tempPath = "E:\\git\\yves\\WebRoot\\files\\uploadFile\\temp";// 设置缓存路径
+
 	@Override
 	public void init() throws ServletException {
 		// 获取在web.xml中配置的文件保存的位置
@@ -93,13 +95,12 @@ public class UploadingFile extends HttpServlet {
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setSizeThreshold(maxMemSize); //
 		// 设置缓存的大小，当上传文件的容量超过该缓存时，直接放到暂时存储室Repository
-		factory.setRepository(new File(
-				"E:\\git\\yves\\WebRoot\\uploadingFile\\temp"));// 原理
-																// 它是先存到暂时存储室，
-																// 然后在真正写到对应目录的硬盘上，
-																// 按理来说当上传一个文件时，其实是上传了两份，
-																// 第一个是以.tem
-																// 格式的，然后再将其真正写到对应目录的硬盘上
+		factory.setRepository(new File(tempPath));// 原理
+													// 它是先存到暂时存储室，
+													// 然后在真正写到对应目录的硬盘上，
+													// 按理来说当上传一个文件时，其实是上传了两份，
+													// 第一个是以.tem
+													// 格式的，然后再将其真正写到对应目录的硬盘上
 
 		// 创建一个API文件上传处理 ，以及配置。
 		ServletFileUpload upload = new ServletFileUpload(factory);

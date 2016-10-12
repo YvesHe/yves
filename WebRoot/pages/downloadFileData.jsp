@@ -11,7 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>My JSP 'dataForm.jsp' starting page</title>
+<title>My JSP 'downloadFileData.jsp' starting page</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -25,19 +25,10 @@
 </head>
 
 <body>
-	<form method="GET" id="myForm" action="forward">
-		<input type="text" name="text1">
-		<br>
-		<input type="text" name="text2">
-		<br>
-		<div id="div1"></div>
-		<button onclick="submitForm()">提交</button>
+	<form method="get" action="downloadFile">
+	<input name="fileName" type="text">
+	<br>
+	<input type="submit" value="下载">
 	</form>
 </body>
-
-<script type="text/javascript">
-	function submitForm() {
-		document.getElementById("myForm").submit();
-	}
-</script>
 </html>

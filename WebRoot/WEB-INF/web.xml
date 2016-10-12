@@ -9,7 +9,7 @@
 		<description>Location to store uploaded file</description>
 		<param-name>file-upload</param-name>
 		<param-value>
-			E:\git\yves\WebRoot\uploadingFile\
+			E:\git\yves\WebRoot\files\uploadFile\
 	     </param-value>
 	</context-param>
 
@@ -55,7 +55,7 @@
 		<description>This is the description of my J2EE component</description>
 		<display-name>This is the display name of my J2EE component</display-name>
 		<servlet-name>ForWard2</servlet-name>
-		<servlet-class>cn.com.yves.servlet.forWard2</servlet-class>
+		<servlet-class>cn.com.yves.servlet.ForWard2</servlet-class>
 	</servlet>
 	<servlet>
 		<description>This is the description of my J2EE component</description>
@@ -63,6 +63,27 @@
 		<servlet-name>UploadingFile</servlet-name>
 		<servlet-class>cn.com.yves.servlet.UploadingFile</servlet-class>
 	</servlet>
+	<!-- 文件下载的Servlet -->
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>DownloadFile</servlet-name>
+		<servlet-class>cn.com.yves.servlet.DownloadFile</servlet-class>
+		<!-- 当Servlet加载的时候init-param用来初始化参数 -->
+		<init-param>
+			<param-name>contentType</param-name>
+			<param-value>application/x-msdownload</param-value>
+		</init-param>
+		<init-param>
+			<param-name>downPath</param-name>
+			<param-value>E:\git\yves\WebRoot\files\DownloadFile\</param-value>
+		</init-param>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</servlet>
+
 
 
 
@@ -103,6 +124,10 @@
 	<servlet-mapping>
 		<servlet-name>UploadingFile</servlet-name>
 		<url-pattern>/uploadingFile</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DownloadFile</servlet-name>
+		<url-pattern>/downloadFile</url-pattern>
 	</servlet-mapping>
 
 	<welcome-file-list>

@@ -25,8 +25,9 @@
 </head>
 
 <body>
-	<form method="post" id="myForm" action="uploadingFile" enctype="multipart/form-data">
+	<form method="POST" id="myForm" action="uploadingFile" enctype="multipart/form-data">
 		<input type="text" name="text">
+		<br>
 		<input type="file" name="file">
 		<br>
 		<input type="file" name="file1">

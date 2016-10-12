@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class forWard2 extends HttpServlet {
+public class ForWard2 extends HttpServlet {
 
 	/**
 	 * The doGet method of the servlet. <br>

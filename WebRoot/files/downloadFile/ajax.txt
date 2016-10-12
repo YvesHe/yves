@@ -1,0 +1,86 @@
+
+
+1。ajax通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。传统的网页（不使用 AJAX）如果需要更新内容，必须重载整个网页页面。
+
+2.Ajax 的核心是 JavaScript 对象 XMLHttpRequest。  关键XMLHttpRequest。
+
+3.为了应对所有的现代浏览器，包括 IE5 和 IE6，请检查浏览器是否支持 XMLHttpRequest 对象。如果支持，则创建 XMLHttpRequest 对象。如果不支持，则创建 ActiveXObject ：
+
+4.如果浏览器不兼容的话
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+
+5.ajax中用都的xmlhttprequest对象是js中的对象。
+
+6.使用ajax时候中的参数一般都是true，也就是说采用的是异步处理，在进行ajax请求的时候，还可以对网页进行其他的操作，互不影响.
+
+
+7.onreadystatechange  属性是告诉拂去其在运行完成后要做什么。可以调用某个方法。
+
+8.ajax的请求数据是你可以通过url？接数据来 发送数据到服务器段的。这时候
+	调用send方法的时候可以传递null。
+
+9.ajax请求都是get方式？
+   不是，如果用的是Post的时候，还要做特殊的处理
+    
+10.当我们在get和post请求时,同时在url中、send方法的data中都放置了参数,为什么获取的总是url中的参数值呢?
+答:在使用Request时,其会从QueryString,Form,ServerVariable中遍历一番,如果发现符合要求的数据,那么就会停止向后搜寻.所以,我们上例中获取的username实际上都是url中的username值.
+
+11.js中通过url通过明文数据来传递的时候处理有些数据不能明文传递 用escape(值)；
+
+
+
+问题：
+1.所谓的dom编程是指什么？
+
+2.在使用ajax的时候如果是get方式的请求，在send（data）里面的放了data  后台是只接受data的数据还是只接受url传递的数据，还是会两个都接受？
+QueryString,Form,ServerVariable中遍历一番,如果发现符合要求的数据,那么就会停止向后搜寻.所以url和send（data）里面的数据如果不是同一个 参数的数据是都可以获取得到的。
+
+3.dom句柄是什么？
+
+
+4.使用回调函数的时候，回调函数可以不写小括号？
+<html>
+<body>
+<script language="JavaScript">
+        var req = null;
+        function test() {
+                //初始化
+                var code = document.all.code.value;
+                var name = document.all.name.value;
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+                //设置属性，当后台处理完成后，回来调用myDeal方法。
+                req.onreadystatechange = myDeal;
+                //发出请求
+                req.open("GET", "b.jsp?code=" + code + "&name=" + name, "false");
+
+                req.send(null);
+        }
+        function myDeal() {
+                if (req.readyState == 4) {
+                        //接收服务端返回的数据
+                        var ret = req.responseText;
+                        //处理数据
+                        document.all("myDiv").innerHTML = ret;
+                }
+        }
+</script>
+
+用户注册：<br>
+用户编号：<input type="text" name="code" onblur="test();">* <div id="myDiv" name="myDiv"></div><br>
+用户名称：<input type="text" name="name"><br>
+<input type="button" value="注册" onclick="test();">
+
+</body>
+</html>
+
+
+
+
