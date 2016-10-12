@@ -25,7 +25,7 @@
 </head>
 
 <body>
-	<form method="get" action="downloadFile">
+	<form method=get action="downloadFile">
 	<input name="fileName" type="text">
 	<br>
 	<input type="submit" value="下载">

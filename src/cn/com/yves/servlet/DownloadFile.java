@@ -29,13 +29,15 @@ public class DownloadFile extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");//get方式提交时,该设置无效,可要可不要
 		// response.setContentType("application/x-msdownload;charset=UTF-8");
 		response.setContentType(contentType);
 		response.setContentType("charset=UTF-8");
 
 		// 先获取要下载的文件名，本例子默认在files/downloadFile下找文件下载
-		String fileName = request.getParameter("fileName");
+		String fileName = new String(request.getParameter("fileName").getBytes(
+				"ISO-8859-1"), "UTF-8");// get方式要处理乱码
+
 		String fullName = downPath + File.separator + fileName;
 
 		// 配置response
