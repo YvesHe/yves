@@ -25,34 +25,29 @@ public class DownloadFile extends HttpServlet {
 	}
 
 	/**
-	 * The doGet method of the servlet. <br>
-	 * 
-	 * This method is called when a form has its tag value method equals to get.
-	 * 
-	 * @param request
-	 *            the request send by the client to the server
-	 * @param response
-	 *            the response send by the server to the client
-	 * @throws ServletException
-	 *             if an error occurred
-	 * @throws IOException
-	 *             if an error occurred
+	 * 页面和后台都保持UTF-8下载文本文件，无中文乱码
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=UTF-8");
+		// response.setContentType("application/x-msdownload;charset=UTF-8");
+		response.setContentType(contentType);
+		response.setContentType("charset=UTF-8");
+
 		// 先获取要下载的文件名，本例子默认在files/downloadFile下找文件下载
 		String fileName = request.getParameter("fileName");
 		String fullName = downPath + File.separator + fileName;
 
-		// 发送到客户端吗？
-		response.reset();
-		response.setContentType(contentType);
-		response.addHeader("Content-Disposition", "attachment; filename=\""
-				+ fileName + "\"");
+		// 配置response
+		response.reset();// 清空buffer,设置页面不缓存
 
-		// 写文件到客户端，虽然doGet（）方法已经向外抛出了异常，但是我还是习惯在里面捕获异常处理
+		response.addHeader("Content-Disposition", "attachment; filename=\""
+				+ fileName + "\"");// Content-Disposition MIME媒体处理类型
+									// attachment 附件形式
+									// 客户使用目标另存为对话框保存指定文件写文件到客户端，
+									// 如果没有这句话，则浏览器会自动打开文档，不会弹出下载对话框。
+
+		// 虽然doGet（）方法已经向外抛出了异常，但是我还是习惯在里面捕获异常处理
 		File file = new File(fullName);
 		if (file.exists() && file.isFile()) {
 			InputStream is = null;
@@ -63,9 +58,10 @@ public class DownloadFile extends HttpServlet {
 				os = response.getOutputStream();
 				byte[] buff = new byte[1024];
 				int len = -1;
-				while ((len = is.read(buff, 0, len)) != -1) {
+				while ((len = is.read(buff)) != -1) {
 					os.write(buff, 0, len);
 				}
+				os.flush();
 			} catch (IOException e) {
 			} finally {
 				if (os != null) {
@@ -82,6 +78,5 @@ public class DownloadFile extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
-
 	}
 }

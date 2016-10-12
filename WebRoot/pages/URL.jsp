@@ -26,7 +26,7 @@
 
 <body>
 	<!-- 处理相对URL -->
-	<!-- 访问地址后悔采用相对的URL加载图片： http://localhost:8080/yves/pages/URL.jsp -->
+	<!-- 访问地址后采用相对的URL加载图片： http://localhost:8080/yves/pages/URL.jsp -->
 	<img alt="" src="./images/wait.gif">
 </body>
 </html>
