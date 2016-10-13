@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ForWard2 extends HttpServlet {
+public class HttpServletResponseMethodTest extends HttpServlet {
 
 	/**
 	 * The doGet method of the servlet. <br>
@@ -25,20 +25,12 @@ public class ForWard2 extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=UTF-8");
-
-		String text1 = new String(request.getParameter("text1").getBytes(
-				"ISO-8859-1"), "UTF-8");
-		System.out.println(text1);
-
-		String att1 = (String) request.getAttribute("att1");
-		System.out.println(att1);
-
-		request.getRequestDispatcher("pages/forwardShow.jsp").forward(request,
-				response);
-
-		// response.sendRedirect("pages/forwardShow.jsp");
+		response.addHeader("Content-Disposition", "attachment; filename=\""
+				+ "finame" + "\"");
+		boolean bool = response.containsHeader("Content-Disposition");
+		System.out.println(bool);
+		int message = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+		response.encodeURL("UTF-8");
 	}
 
 	/**
@@ -58,7 +50,6 @@ public class ForWard2 extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
 	}
 
 }

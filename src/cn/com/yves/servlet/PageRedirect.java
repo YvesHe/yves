@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ForWard2 extends HttpServlet {
+public class PageRedirect extends HttpServlet {
 
 	/**
 	 * The doGet method of the servlet. <br>
@@ -25,20 +25,17 @@ public class ForWard2 extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=UTF-8");
+		// 设置响应内容类型
+		response.setContentType("text/html");
 
-		String text1 = new String(request.getParameter("text1").getBytes(
-				"ISO-8859-1"), "UTF-8");
-		System.out.println(text1);
+		// 要重定向的新位置
+		String site = new String("http://www.w3cschool.cn");
 
-		String att1 = (String) request.getAttribute("att1");
-		System.out.println(att1);
+		// response.sendRedirect(site);// 方法一：简单重定向
 
-		request.getRequestDispatcher("pages/forwardShow.jsp").forward(request,
-				response);
-
-		// response.sendRedirect("pages/forwardShow.jsp");
+		response.setStatus(response.SC_MOVED_TEMPORARILY);
+		response.setHeader("Location", site);// 方法二：通过设置setStatus和setHeader,
+												// 这中方法是通过设置html中meta来实现跳转
 	}
 
 	/**

@@ -28,7 +28,8 @@
 	<%
 		String att1 = (String)request.getAttribute("att1");
 		System.out.println(att1);
-		String text1 = request.getParameter("text1");
+		String text1 = new String(request.getParameter("text1").getBytes(
+				"ISO-8859-1"), "UTF-8");
 		System.out.println(text1);
 	%>
 	

@@ -28,7 +28,8 @@ public class Forward extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 
-		String tex1 = request.getParameter("text1");
+		String tex1 = new String(request.getParameter("text1").getBytes(
+				"ISO-8859-1"), "UTF-8");
 		System.out.println(tex1);
 
 		request.setAttribute("att1", "from forward");

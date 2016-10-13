@@ -11,7 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>My JSP 'dataForm.jsp' starting page</title>
+<title>My JSP 'PageRedirectData.jsp' starting page</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -25,19 +25,13 @@
 </head>
 
 <body>
-	<form method="POST" id="myForm" action="forward">
-		<input type="text" name="text1">
-		<br>
-		<input type="text" name="text2">
-		<br>
-		<div id="div1"></div>
-		<button onclick="submitForm()">提交</button>
+	<form id="myForm" method="get" action="pageRedirect">
+		<button onclick="submitForm();">网页重定向</button>
 	</form>
+	<script type="text/javascript">
+		function submitForm() {
+			document.getElementById("myForm").submit();
+		}
+	</script>
 </body>
-
-<script type="text/javascript">
-	function submitForm() {
-		document.getElementById("myForm").submit();
-	}
-</script>
 </html>
