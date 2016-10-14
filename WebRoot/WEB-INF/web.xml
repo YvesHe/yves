@@ -95,6 +95,13 @@
     <servlet-name>HttpServletResponseMethodTest</servlet-name>
     <servlet-class>cn.com.yves.servlet.HttpServletResponseMethodTest</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>HttpServletRequestMethodTest</servlet-name>
+    <servlet-class>cn.com.yves.servlet.HttpServletRequestMethodTest</servlet-class>
+  </servlet>
+
 
 
 
@@ -150,6 +157,10 @@
   <servlet-mapping>
     <servlet-name>HttpServletResponseMethodTest</servlet-name>
     <url-pattern>/httpServletResponseMethodTest</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HttpServletRequestMethodTest</servlet-name>
+    <url-pattern>/httpServletRequestMethodTest</url-pattern>
   </servlet-mapping>
 
 	<welcome-file-list>
