@@ -172,4 +172,28 @@ public class UserDao implements UserDaoInf {
 		}
 		return bool;
 	}
+
+	public boolean validateUserBean(String userName, String userPwd)
+			throws SQLException {
+		boolean bool = false;
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		String sql = "select * from t_user where userName=? and userPwd=?";
+		try {
+			conn = DBUtill.getConnection();
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, userName);
+			pstm.setString(2, userPwd);
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				bool = true;
+			}
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			DBUtill.close(conn, pstm, rs);
+		}
+		return bool;
+	}
 }

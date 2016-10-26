@@ -6,6 +6,7 @@
 			+ path + "/";
 %>
 
+<!-- 本页面是用来测试在使用相对资源时,URL如何书写.   直接访问该页面-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -25,8 +26,8 @@
 </head>
 
 <body>
-	<!-- 处理相对URL -->
-	<!-- 访问地址后采用相对的URL加载图片： http://localhost:8080/yves/pages/URL.jsp -->
-	<img alt="" src="./images/wait.gif">
+	<!-- 处理相对URL :  ".是指相对于WebRoot文件夹"  -->
+	<!-- 访问地址后采用相对的URL加载图片： http://localhost:8080/yves/pages/url.jsp -->
+	<img alt="" src="./images/url.png">
 </body>
 </html>

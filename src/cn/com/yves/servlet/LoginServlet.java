@@ -8,7 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.com.yves.service.UserService;
+
+/**
+ * 验证登录servlet
+ * 
+ * @author User
+ * 
+ */
 public class LoginServlet extends HttpServlet {
+	private UserService userService = new UserService();
 
 	/**
 	 * 
@@ -90,15 +99,16 @@ public class LoginServlet extends HttpServlet {
 		String userName = request.getParameter("userName").trim();
 		String userPwd = request.getParameter("userPwd").trim();
 		System.out.println(userName);
-		System.out.println( request.getParameter("name").trim());
+		System.out.println(request.getParameter("name").trim());
 
-		// validate the data
-		if (userName.equals("何宇") && userPwd.equals("123456")) {
+		// 验证user是否存在
+
+		if (userService.validateUserByName(userName, userPwd)) {
 			PrintWriter pw = response.getWriter();
 			pw.write("登录成功!");
 		} else {
 			PrintWriter pw = response.getWriter();
-			pw.write("登录失败!");
+			pw.write("登录失败,数据库不存在该用户或密码错误!");
 		}
 	}
 

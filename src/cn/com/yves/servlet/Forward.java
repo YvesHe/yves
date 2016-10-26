@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.com.yves.bean.UserBean;
+
 public class Forward extends HttpServlet {
 
 	/**
@@ -32,7 +34,11 @@ public class Forward extends HttpServlet {
 				"ISO-8859-1"), "UTF-8");
 		System.out.println(tex1);
 
+		UserBean ub = new UserBean();
+		ub.setUserName("yves");
+
 		request.setAttribute("att1", "from forward");
+		request.setAttribute("user", ub);
 
 		request.getRequestDispatcher("forWard2").forward(request, response);
 		// 用sendRedirect重定向会丢失所有的数据，包括Attribute和parameter中的数据

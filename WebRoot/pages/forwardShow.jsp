@@ -11,6 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 
+
 <title>My JSP 'forwardShow.jsp' starting page</title>
 
 <meta http-equiv="pragma" content="no-cache">
@@ -26,25 +27,29 @@
 
 <body>
 	<%
-		String att1 = (String)request.getAttribute("att1");
+		String att1 = (String) request.getAttribute("att1");
 		System.out.println(att1);
 		String text1 = new String(request.getParameter("text1").getBytes(
 				"ISO-8859-1"), "UTF-8");
 		System.out.println(text1);
 	%>
-	
+	<%=path%><br>
+	<%=basePath%><br>
+	${pageContext.request.contextPath}
+
 	<div id="divShow"></div>
 	<div id="divShow2"></div>
 	<input type="button" onclick="showData();" value="显示数据">
+	<br> ${requestScope.user.userName}
+
 </body>
 <script type="text/javascript">
 	var text1 = "<%=text1%>";
 	var att1 = "<%=att1%>";
-	
-	function showData(){
-		document.getElementById("divShow").innerHTML=text1;
-		document.getElementById("divShow2").innerHTML=att1;
-	}
 
+	function showData() {
+		document.getElementById("divShow").innerHTML = text1;
+		document.getElementById("divShow2").innerHTML = att1;
+	}
 </script>
 </html>

@@ -6,7 +6,7 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<!-- 本页面是用来测试   Ajax 请求的 -->
+<!-- 本页面是用来测试   Ajax 请求的,直接访问 -->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -25,22 +25,19 @@
 </head>
 <body>
 	<form action="#">
-		<textarea id="showResult" rows="4" cols="8"></textarea>
-		</br> <span>UserName:</span>
+		<textarea id="showResult" rows="4" cols="30">结果显示区域:</textarea><br>
+		 登录采用Ajax请求登录 </br>
+		<span>UserName:</span>
 		<input name="userName" type="text">
 		</br> <span>Password:</span>
 		<input name="userPwd" type="password">
 		<div id="divPwd" style="dispaly:inline"></div>
 		</br>
-		<input type="reset" value="reset">
-		<input type="button" value="login" onclick="ajaxLogin();">
-		</br>
-		<input type="button" value="ajaxGet方式中文乱码" onclick="">
-		</br>
-		<input type="button" value="ajax读取xml数据" onclick="readXMLData();">
-		</br>
-		<button onclick="readJsonData();">ajax请求json数据</button>
-
+		<input type="reset" value="重置">
+		<input type="button" value="登录" onclick="ajaxLogin();">
+		</br></br>
+		<input type="button" value="Ajax读取xml数据" onclick="readXMLData();">
+		<button onclick="readJsonData();">Ajax请求json数据</button>
 	</form>
 </body>
 
@@ -56,12 +53,17 @@
 	}
 
 	function ajaxLogin() {
-		request = ajaxRequest();
-		request.open("POST", "LoginServlet?name=" + userName.value + "&pwd="
+		request = ajaxRequest(); //ajaxRequest();方法定义在yves.js中
+
+		//设置 请求方法 和  请求URl
+		request.open("POST", "loginServlet?name=" + userName.value + "&pwd="
 				+ userPwd.value + "&nowTime=" + new Date().getTime());
-		// post option
+
+		//post 请求方式必须设置的代码
 		request.setRequestHeader("Content-Type",
 				"application/x-www-form-urlencoded");
+
+		//回调方法
 		request.onreadystatechange = function() {
 			if (request.readyState == 4) {
 				if (request.status == 200) {
@@ -75,7 +77,7 @@
 					alert("其他异常!");
 				}
 			} else {
-				//data loading ...
+				//出现一个等待的动态图片,提示正在加载
 				divPwd.innerHTML = "<img alt='正在加载...' src='images/wait.gif'>";
 			}
 		};
@@ -84,9 +86,12 @@
 						+ userPwd.value);
 	}
 
+	//读XML数据
 	function readXMLData() {
 		request = ajaxRequest();
-		request.open("GET", "ReadXML?nowTime=" + new Date().getTime());
+
+		//get 请求方式
+		request.open("GET", "readXML?nowTime=" + new Date().getTime());
 		request.onreadystatechange = function() {
 			if (request.readyState == 4) {
 				if (request.status == 200) {
@@ -109,15 +114,18 @@
 					alert("其他异常!");
 				}
 			} else {
-				//data loading ...
+				//加载数据 ...
 			}
 		};
 		request.send(null);
 	}
 
+	//读Json数据
 	function readJsonData() {
 		request = ajaxRequest();
-		request.open("GET", "ReadJson?nowTime=" + new Date().getTime());
+
+		//get 请求方式
+		request.open("GET", "readJson?nowTime=" + new Date().getTime());
 		request.onreadystatechange = function() {
 			if (request.readyState == 4) {
 				if (request.status == 200) {
@@ -136,7 +144,7 @@
 					alert("其他异常!");
 				}
 			} else {
-				//data loading ...
+				//加载数据 ...
 			}
 		};
 		request.send(null);

@@ -75,4 +75,16 @@ public interface UserDaoInf {
 	 * @throws SQLException
 	 */
 	boolean validateUserBean(String userId) throws SQLException;
+
+	/**
+	 * 
+	 * @Descripton :验证是否存在UserBean
+	 * 
+	 * @param userId
+	 * @return boolean
+	 * @throws SQLException
+	 */
+	boolean validateUserBean(String userName, String userPwd)
+			throws SQLException;
+
 }
