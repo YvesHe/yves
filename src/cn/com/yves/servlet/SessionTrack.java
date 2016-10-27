@@ -2,15 +2,20 @@ package cn.com.yves.servlet;
 
 import java.io.IOException;
 import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-public class FormServlet extends HttpServlet {
+/**
+ * session 的声明周期是一次回话,只要浏览器没关闭,session 在有效的session时间内session就一直有效
+ * 
+ * @author User
+ * 
+ */
+public class SessionTrack extends HttpServlet {
 
 	/**
 	 * The doGet method of the servlet. <br>
@@ -28,36 +33,27 @@ public class FormServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// true 如果没有session 则创建
+		HttpSession session = request.getSession(true);
+		session.setAttribute("yves", "yves");
 
-		String text1 = request.getParameter("text1");
+		// session id
+		System.out.println(session.getId());
 
-		Map<String, Object> myMap = request.getParameterMap();
-		// myMap.entrySet().iterator();
-		Iterator<String> iterMap = myMap.keySet().iterator();
-		while (iterMap.hasNext()) {
-			Object obj = (Object) myMap.get(iterMap.next());
+		// 遍历session的Attribute
+		System.out.println("****遍历开始******");
+		Enumeration en = session.getAttributeNames();
+		while (en.hasMoreElements()) {
+			Object obj = en.nextElement();
 			System.out.println(obj);
 		}
+		System.out.println("****遍历结束******");
 
-		Enumeration en = request.getAttributeNames();
-		while (en.hasMoreElements()) {
-			Object obj = (Object) en.nextElement();
-			System.out.println(obj.toString());
+		// 数据传递 : session与 是sendRedirect 还是 forward 无关.
+		response.sendRedirect("sessionTrack2");
+		// request.getRequestDispatcher("sessionTrack2")
+		// .forward(request, response);
 
-			// System.out.println("obj.toString()==="+obj.toString());
-			if (obj.toString().trim().equals("LastPage")) {
-				System.out.println("LastPage \n");
-			} else if (obj.toString().trim().equals("NextPage")) {
-				System.out.println("NextPage");
-			}
-		}
-		System.out.println(en);
-
-		String[] files = request.getParameterValues("file");
-
-		request.setAttribute("name", "heyu");
-
-		response.sendRedirect("/yves/showUserServlet");
 	}
 
 	/**

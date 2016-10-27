@@ -15,12 +15,18 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+/**
+ * 注意:文件上传方式必须是Post方式
+ * 
+ * @author User
+ * 
+ */
 public class UploadingFile extends HttpServlet {
 
-	// 判断是否是是文件上传的文件。
+	// 判断是否是文件上传的文件。
 	private boolean isMultipart;
 	// 保存文件的路径
-	private String filePath;
+	private String dirPath;
 	// 限制上传文件的大小
 	private int maxFileSize = 50 * 1024;
 	// 缓存大小
@@ -32,10 +38,22 @@ public class UploadingFile extends HttpServlet {
 
 	private String tempPath = "E:\\git\\yves\\WebRoot\\files\\uploadFile\\temp";// 设置缓存路径
 
+	// 设置文件的保存路径除了在web.xml中配置还可以直接写在代码里
+	private static final String UPLOAD_DIRECTORY = "upload";// 定义上传文件存储目录
+
 	@Override
 	public void init() throws ServletException {
 		// 获取在web.xml中配置的文件保存的位置
-		filePath = getServletContext().getInitParameter("file-upload");
+		dirPath = getServletContext().getInitParameter("file-upload");
+
+		// 方法二： 直接使用定义的路径
+		// filePath = UPLOAD_DIRECTORY;
+
+		// 如果目录不存在则创建
+		File uploadDir = new File(dirPath);
+		if (!uploadDir.exists()) {
+			uploadDir.mkdir();
+		}
 	}
 
 	/**
@@ -118,67 +136,66 @@ public class UploadingFile extends HttpServlet {
 
 			while (i.hasNext()) {
 				FileItem fi = i.next();
-				if (!fi.isFormField()) {
-					// 获取上传文件的参数
+				if (!fi.isFormField()) {// 当该表单类型是不是普通类型时，获取上传文件的参数
 
+					// FileItem中能获取信息的一些常用方法
 					String fieldName = fi.getFieldName();// 该文件在表中的控件名
-					// 文件名乱码问题
-					String fileName = fi.getName();// 文件名，包括后缀
-					// String fileName = new String(fi.getName().getBytes(
-					// "ISO8859_1"), "UTF-8");不加这个转化也是可以
 
 					String contentType = fi.getContentType();// 文档类型
+
 					boolean isInMemory = fi.isInMemory();// ???
+
 					long sizeInBytes = fi.getSize();// 上传的文件的总大小字节数
 
-					// 当有文件上上传的时候，生成文件，只截取文件名字
-					if (!fileName.equals("")) {
-						if (fileName.lastIndexOf("\\") >= -1) {
-							file = new File(filePath
-									+ fileName.substring(fileName
-											.lastIndexOf("\\") + 1));
-						} else {
-							file = new File(filePath + fileName);
-						}
+					// fi.getName() 获取到的是全路径名 ,所以通过下面的方式来只获取文件的名字
+					String fileName = new File(fi.getName()).getName(); // String
+																		// fileName
+																		// = new
+																		// String(fi.getName().getBytes(
+																		// "ISO8859_1"),
+																		// "UTF-8");不加这个转化也是可以
 
-						// 第三方写文件的方法，该方法会抛出异常
-						// 用exception捕捉，所有的异常可以统一放在外面处理，这里为了方便理解都在内部捕捉了。
-						try {
-							fi.write(file);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-
-						// 自己处理写文件，出现没有内容，该如何解决。
-						// InputStream is = null;
-						// OutputStream os = null;
-						// try {
-						// is = fi.getInputStream();
-						// os = new FileOutputStream(file);
-						// byte[] buffer = new byte[1024];
-						// int len = -1;
-						// while ((len = is.read()) != -1) {
-						// os.write(buffer, 0, len);
-						// }
-						// } catch (Exception e) {
-						// } finally {
-						// if (os != null) {
-						// os.close();
-						// }
-						// if (is != null) {
-						// is.close();
-						// }
-						// }
-
+					if (!fileName.equals("")) {// 当文件上传控件没有选择文件的时候则 fileName为空
+						file = new File(dirPath + fileName);
 					}
-				} else {
-					// 否则是表单中的一般字符串参数,继续做参数传递
-					// 获取用户具体输入的字符串 ，名字起得挺好，因为表单提交过来的是 字符串类型的
-					// String message = fi.getString();
-					// 有中文必须fi.getString("UTF-8");
-					String message = fi.getString("UTF-8");
 
-					request.setAttribute("att" + ++count, message);
+					// 第三方写文件的方法，该方法会抛出异常
+					// 用exception捕捉，所有的异常可以统一放在外面处理，这里为了方便理解都在内部捕捉了。
+					try {
+						fi.write(file);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+					// 自己处理写文件，出现没有内容，该如何解决。
+					// InputStream is = null;
+					// OutputStream os = null;
+					// try {
+					// is = fi.getInputStream();
+					// os = new FileOutputStream(file);
+					// byte[] buffer = new byte[1024];
+					// int len = -1;
+					// while ((len = is.read()) != -1) {
+					// os.write(buffer, 0, len);
+					// }
+					// } catch (Exception e) {
+					// } finally {
+					// if (os != null) {
+					// os.close();
+					// }
+					// if (is != null) {
+					// is.close();
+					// }
+					// }
+
+				} else {// 否则是表单中的一般字符串参数
+
+					// 获取用户具体输入的字符串 ，名字起得挺好，因为表单提交过来的是 字符串类型的
+					String message = fi.getString("UTF-8"); // String
+															// message=fi.getString();
+															// 有中文必须fi.getString("UTF-8");
+					// 将表当中所有的普通表单数据打印
+					System.out.println("普通表单数据" + ++count + ":" + message);
 				}
 			}
 		} catch (FileUploadException e) {

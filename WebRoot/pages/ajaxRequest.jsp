@@ -37,7 +37,7 @@
 		<input type="button" value="登录" onclick="ajaxLogin();">
 		</br></br>
 		<input type="button" value="Ajax读取xml数据" onclick="readXMLData();">
-		<button onclick="readJsonData();">Ajax请求json数据</button>
+		<input type="button" value="Ajax请求json数据" onclick="readJsonData();">
 	</form>
 </body>
 

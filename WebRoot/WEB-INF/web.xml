@@ -101,6 +101,27 @@
     <servlet-name>HttpServletRequestMethodTest</servlet-name>
     <servlet-class>cn.com.yves.servlet.HttpServletRequestMethodTest</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SessionTrack</servlet-name>
+    <servlet-class>cn.com.yves.servlet.SessionTrack</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SessionTrack2</servlet-name>
+    <servlet-class>cn.com.yves.servlet.SessionTrack2</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>CookieConfig</servlet-name>
+    <servlet-class>cn.com.yves.servlet.CookieConfig</servlet-class>
+  </servlet>
+
+
+
 
 
 
@@ -161,6 +182,18 @@
   <servlet-mapping>
     <servlet-name>HttpServletRequestMethodTest</servlet-name>
     <url-pattern>/httpServletRequestMethodTest</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SessionTrack</servlet-name>
+    <url-pattern>/sessionTrack</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SessionTrack2</servlet-name>
+    <url-pattern>/sessionTrack2</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CookieConfig</servlet-name>
+    <url-pattern>/cookieConfig</url-pattern>
   </servlet-mapping>
 
 	<welcome-file-list>

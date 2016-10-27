@@ -25,16 +25,6 @@
 </head>
 
 <body>
-	This is show the uploadFile Result!
-	<%
-	//取值为null
-	String text = request.getParameter("text");
-	//取att1的值
-	String att1 = (String) request.getAttribute("att1");
-	%>
-	
-	<input type="text" value="<%=text%>">
-	<input type="text" value="<%=att1%>">
-
+	文件上传成功!
 </body>
 </html>

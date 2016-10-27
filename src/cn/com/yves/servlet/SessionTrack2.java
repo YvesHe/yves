@@ -1,16 +1,14 @@
 package cn.com.yves.servlet;
 
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-public class FormServlet extends HttpServlet {
+public class SessionTrack2 extends HttpServlet {
 
 	/**
 	 * The doGet method of the servlet. <br>
@@ -28,36 +26,23 @@ public class FormServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
 
-		String text1 = request.getParameter("text1");
+		// session Id 应该与第一次的相同
+		System.out.println(session.getId());
 
-		Map<String, Object> myMap = request.getParameterMap();
-		// myMap.entrySet().iterator();
-		Iterator<String> iterMap = myMap.keySet().iterator();
-		while (iterMap.hasNext()) {
-			Object obj = (Object) myMap.get(iterMap.next());
-			System.out.println(obj);
-		}
+		// 取出session中的数据
+		String yves = (String) session.getAttribute("yves");
+		System.out.println(yves);
 
-		Enumeration en = request.getAttributeNames();
-		while (en.hasMoreElements()) {
-			Object obj = (Object) en.nextElement();
-			System.out.println(obj.toString());
+		// 注意: session的生命周期与数据传的方式是无关的
 
-			// System.out.println("obj.toString()==="+obj.toString());
-			if (obj.toString().trim().equals("LastPage")) {
-				System.out.println("LastPage \n");
-			} else if (obj.toString().trim().equals("NextPage")) {
-				System.out.println("NextPage");
-			}
-		}
-		System.out.println(en);
+		// 转发数据session数据不丢失
+		// request.getRequestDispatcher("pages/sessionTrackShow.jsp").forward(
+		// request, response);
 
-		String[] files = request.getParameterValues("file");
-
-		request.setAttribute("name", "heyu");
-
-		response.sendRedirect("/yves/showUserServlet");
+		// 重定向数据,session依然能传递
+		response.sendRedirect("pages/sessionTrackShow.jsp");
 	}
 
 	/**
