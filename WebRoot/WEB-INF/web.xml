@@ -3,6 +3,10 @@
 	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
 
 	<!-- 配置文件上传的路径 -->
 	<context-param>
@@ -14,6 +18,18 @@
 	</context-param>
 
 	<display-name></display-name>
+
+
+	<!-- 配置过滤器 -->
+	<filter>
+		<filter-name>FilterAll</filter-name>
+		<filter-class>cn.com.yves.servlet.FilterAll</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FilterAll</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 
 	<servlet>
 		<description>This is the description of my J2EE component</description>
@@ -63,6 +79,7 @@
 		<servlet-name>UploadingFile</servlet-name>
 		<servlet-class>cn.com.yves.servlet.UploadingFile</servlet-class>
 	</servlet>
+
 	<!-- 文件下载的Servlet -->
 	<servlet>
 		<description>This is the description of my J2EE component</description>
@@ -83,42 +100,49 @@
 			<param-value>UTF-8</param-value>
 		</init-param>
 	</servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>PageRedirect</servlet-name>
-    <servlet-class>cn.com.yves.servlet.PageRedirect</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>HttpServletResponseMethodTest</servlet-name>
-    <servlet-class>cn.com.yves.servlet.HttpServletResponseMethodTest</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>HttpServletRequestMethodTest</servlet-name>
-    <servlet-class>cn.com.yves.servlet.HttpServletRequestMethodTest</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>SessionTrack</servlet-name>
-    <servlet-class>cn.com.yves.servlet.SessionTrack</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>SessionTrack2</servlet-name>
-    <servlet-class>cn.com.yves.servlet.SessionTrack2</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>CookieConfig</servlet-name>
-    <servlet-class>cn.com.yves.servlet.CookieConfig</servlet-class>
-  </servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>PageRedirect</servlet-name>
+		<servlet-class>cn.com.yves.servlet.PageRedirect</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>HttpServletResponseMethodTest</servlet-name>
+		<servlet-class>cn.com.yves.servlet.HttpServletResponseMethodTest</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>HttpServletRequestMethodTest</servlet-name>
+		<servlet-class>cn.com.yves.servlet.HttpServletRequestMethodTest</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>SessionTrack</servlet-name>
+		<servlet-class>cn.com.yves.servlet.SessionTrack</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>SessionTrack2</servlet-name>
+		<servlet-class>cn.com.yves.servlet.SessionTrack2</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>CookieConfig</servlet-name>
+		<servlet-class>cn.com.yves.servlet.CookieConfig</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>AutoRefresh</servlet-name>
+		<servlet-class>cn.com.yves.servlet.AutoRefresh</servlet-class>
+	</servlet>
+
 
 
 
@@ -171,34 +195,36 @@
 		<servlet-name>DownloadFile</servlet-name>
 		<url-pattern>/downloadFile</url-pattern>
 	</servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>PageRedirect</servlet-name>
-    <url-pattern>/pageRedirect</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>HttpServletResponseMethodTest</servlet-name>
-    <url-pattern>/httpServletResponseMethodTest</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>HttpServletRequestMethodTest</servlet-name>
-    <url-pattern>/httpServletRequestMethodTest</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>SessionTrack</servlet-name>
-    <url-pattern>/sessionTrack</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>SessionTrack2</servlet-name>
-    <url-pattern>/sessionTrack2</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>CookieConfig</servlet-name>
-    <url-pattern>/cookieConfig</url-pattern>
-  </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PageRedirect</servlet-name>
+		<url-pattern>/pageRedirect</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>HttpServletResponseMethodTest</servlet-name>
+		<url-pattern>/httpServletResponseMethodTest</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>HttpServletRequestMethodTest</servlet-name>
+		<url-pattern>/httpServletRequestMethodTest</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SessionTrack</servlet-name>
+		<url-pattern>/sessionTrack</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SessionTrack2</servlet-name>
+		<url-pattern>/sessionTrack2</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CookieConfig</servlet-name>
+		<url-pattern>/cookieConfig</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AutoRefresh</servlet-name>
+		<url-pattern>/autoRefresh</url-pattern>
+	</servlet-mapping>
 
-	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
+
 
 
 

@@ -17,6 +17,7 @@ public class DownloadFile extends HttpServlet {
 	private String encoding;
 	private String downPath;
 
+	// 下载文件的配置在web.xml中的相应servlet中配置了,当然也是可以直接在这里配置的,分别配置了媒体类型,编码格式,和下载文件来源的路径Dir
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		contentType = config.getInitParameter("contentType");
@@ -29,7 +30,9 @@ public class DownloadFile extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");//get方式提交时,该设置无效,可要可不要
+		request.setCharacterEncoding("UTF-8");// get方式提交时,该设置无效,可要可不要
+
+		// 下面两句的配置相当于:
 		// response.setContentType("application/x-msdownload;charset=UTF-8");
 		response.setContentType(contentType);
 		response.setContentType("charset=UTF-8");
@@ -43,11 +46,12 @@ public class DownloadFile extends HttpServlet {
 		// 配置response
 		response.reset();// 清空buffer,设置页面不缓存
 
+		String resultName = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");// 处理下载中文文件名时下载对话框中不显示名字
 		response.addHeader("Content-Disposition", "attachment; filename=\""
-				+ fileName + "\"");// Content-Disposition MIME媒体处理类型
-									// attachment 附件形式
-									// 客户使用目标另存为对话框保存指定文件写文件到客户端，
-									// 如果没有这句话，则浏览器会自动打开文档，不会弹出下载对话框。
+				+ resultName + "\"");// Content-Disposition MIME媒体处理类型
+										// attachment 附件形式
+										// 客户使用目标另存为对话框保存指定文件写文件到客户端，
+										// 如果没有这句话，则浏览器会自动打开文档，不会弹出下载对话框。
 
 		// 虽然doGet（）方法已经向外抛出了异常，但是我还是习惯在里面捕获异常处理
 		File file = new File(fullName);

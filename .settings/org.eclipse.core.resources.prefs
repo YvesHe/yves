@@ -1,5 +1,7 @@
 eclipse.preferences.version=1
+encoding//WebRoot/pages/autoRefresh.jsp=UTF-8
 encoding//WebRoot/pages/cookieConfig.jsp=UTF-8
+encoding//WebRoot/pages/countView.jsp=UTF-8
 encoding//WebRoot/pages/forwardData.jsp=UTF-8
 encoding//WebRoot/pages/forwardShow.jsp=UTF-8
 encoding//WebRoot/pages/pageRedirectData.jsp=UTF-8
