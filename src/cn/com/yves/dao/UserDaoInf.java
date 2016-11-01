@@ -35,6 +35,25 @@ public interface UserDaoInf {
 	UserBean getUserBeanById(String userId) throws SQLException;
 
 	/**
+	 * @Description: 查询UserBean by userName
+	 * 
+	 * @param userName
+	 * @return
+	 * @throws SQLException
+	 */
+	UserBean getUserBeanByName(String userName) throws SQLException;;
+
+	/**
+	 * 
+	 * @Description: 查询UserBean by nickName 模糊查询
+	 * 
+	 * @param userId
+	 * @return UserBean
+	 * @throws SQLException
+	 */
+	List<UserBean> getUserBeanByNickName(String nickName) throws SQLException;
+
+	/**
 	 * 
 	 * @Descripton :新增UserBean
 	 * 
@@ -68,17 +87,7 @@ public interface UserDaoInf {
 
 	/**
 	 * 
-	 * @Descripton :验证是否存在UserBean
-	 * 
-	 * @param userId
-	 * @return boolean
-	 * @throws SQLException
-	 */
-	boolean validateUserBean(String userId) throws SQLException;
-
-	/**
-	 * 
-	 * @Descripton :验证是否存在UserBean
+	 * @Descripton :验证是否存在UserBean 三种登录方式
 	 * 
 	 * @param userId
 	 * @return boolean
@@ -86,5 +95,36 @@ public interface UserDaoInf {
 	 */
 	boolean validateUserBean(String userName, String userPwd)
 			throws SQLException;
+
+	/**
+	 * 
+	 * @Descripton :验证是否存在 相同的邮箱
+	 * 
+	 * @param userId
+	 * @return boolean
+	 * @throws SQLException
+	 */
+	boolean validateUserBeanByEmail(String userName) throws SQLException;
+
+	/**
+	 * 
+	 * @Descripton :验证是否存在 相同的手机号
+	 * 
+	 * @param userId
+	 * @return boolean
+	 * @throws SQLException
+	 */
+	boolean validateUserBeanByPhoneNumber(String userPhoneNumber)
+			throws SQLException;
+
+	/**
+	 * 
+	 * @Descripton :验证是否存在 相同的账号
+	 * 
+	 * @param userId
+	 * @return boolean
+	 * @throws SQLException
+	 */
+	boolean validateUserBeanByCount(String userPhoneNumber) throws SQLException;
 
 }

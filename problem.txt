@@ -4,3 +4,97 @@
 
 3.在对数据进行新增的时候,如何新增失败,如何进行数据库的回滚.
 
+4.如何实现数据的id的自增
+
+5.项目对异常的处理,如何生成日志.
+
+6.在对新用户新增的时候,密码是如何进行加密了,然后存储在数据库中的,比如  md5 加密
+
+7.在进行页面跳转的时候,应该还有一个权限管理,哪些页面该用户有权限,哪些用户是没有权限的.
+
+8.在权限管理的时候,如何避免每次用户的登录结果失效,哪些数据需要保存到session中去.
+
+9.注意数据库中建表的规范,然后代码统一规范.
+
+10.用户名userName 应该是唯一的  相当于其他网站的账号.
+
+11.如何实现可以多种方式登录,比如可以邮箱登录  ,手机号登录, 账号登录
+
+12.已经登录的账号实现安全退出.  清空session
+
+
+
+
+
+
+
+
+
+
+
+
+
+以下代码为处理   11中多种方式登录.
+测试的代码：
+
+public static void main(String[] args) {
+
+//String e = "257@qq.com";
+
+String e ="15315315326";
+
+String em = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
+
+//String ph = " ^[1][358][0-9]{9}$";
+
+String ph = "^[1][3578]\\d{9}$";
+
+//Pattern pemail = Pattern.compile("em");
+
+System.out.println(e.matches(em));
+
+System.out.println(e.matches(ph));
+
+if(e.matches(em)){//邮箱登录
+
+System.out.println("you想");
+
+} else if(e.matches(ph)){//手机号登录
+
+System.out.println("手机红啊");
+
+}else{//就是用户名登录
+
+System.out.println("用户名");
+
+}
+
+}
+3
+
+项目中的使用：
+
+//判断用户的登录方式
+
+String loginmethod = webParams.reqString("phone");
+
+String em = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
+
+String ph = "^[1][3578]\\d{9}$";
+
+if(loginmethod.matches(em)){//邮箱登录
+
+userGetMap.put("email", loginmethod);
+
+} else if(loginmethod.matches(ph)){//手机号登录
+
+userGetMap.put("phone", webParams.reqString("phone"));
+
+}else{//就是用户名登录
+
+userGetMap.put("username", webParams.reqString("phone"));
+
+}
+
+DbResultMap userObj = dao.selectObj(UserBiz.USER_GET, userGetMap);
+

@@ -142,6 +142,48 @@
 		<servlet-name>AutoRefresh</servlet-name>
 		<servlet-class>cn.com.yves.servlet.AutoRefresh</servlet-class>
 	</servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserDelete</servlet-name>
+    <servlet-class>cn.com.yves.servlet.user.UserDelete</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserAdd</servlet-name>
+    <servlet-class>cn.com.yves.servlet.user.UserAdd</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserQuery</servlet-name>
+    <servlet-class>cn.com.yves.servlet.user.UserQuery</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserUpdate</servlet-name>
+    <servlet-class>cn.com.yves.servlet.user.UserUpdate</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserLogin</servlet-name>
+    <servlet-class>cn.com.yves.servlet.user.UserLogin</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserExit</servlet-name>
+    <servlet-class>cn.com.yves.servlet.user.UserExit</servlet-class>
+  </servlet>
+
+
+
+
+
+
 
 
 
@@ -223,6 +265,30 @@
 		<servlet-name>AutoRefresh</servlet-name>
 		<url-pattern>/autoRefresh</url-pattern>
 	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserDelete</servlet-name>
+    <url-pattern>/userDelete</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserAdd</servlet-name>
+    <url-pattern>/userAdd</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserQuery</servlet-name>
+    <url-pattern>/userQuery</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserUpdate</servlet-name>
+    <url-pattern>/userUpdate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserLogin</servlet-name>
+    <url-pattern>/userLogin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserExit</servlet-name>
+    <url-pattern>/userExit</url-pattern>
+  </servlet-mapping>
 
 
 
