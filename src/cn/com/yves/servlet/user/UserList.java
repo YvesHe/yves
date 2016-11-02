@@ -11,12 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import cn.com.yves.bean.UserBean;
-import cn.com.yves.constant.Constant;
 import cn.com.yves.dao.UserDaoInf;
 import cn.com.yves.dao.impl.UserDao;
 
-public class UserQuery extends HttpServlet {
-	UserDaoInf iUserDao = new UserDao();
+public class UserList extends HttpServlet {
+	private UserDaoInf iUserDao = new UserDao();
+
+	@Override
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
 
 	/**
 	 * The doPost method of the servlet. <br>
@@ -38,11 +43,10 @@ public class UserQuery extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 
-		/* 由于是内部使用,查询我这里也做权限处理; 1.要登录 2.显示自己等级低的账号信息(暂时先显示符合条件的所有数据) */
-		// 判断登录
+		// 判断用户是否已经登录, 在userList.jsp也做了想通的验证
 		HttpSession session = request.getSession(true);
-		UserBean seftBean = (UserBean) session.getAttribute("userBean");
-		if (seftBean == null) {
+		UserBean userBean = (UserBean) session.getAttribute("userBean");
+		if (userBean == null) {
 			String message = "<html><head><script type='text/javascript'>alert('请先登录!');</script></head><body></body></html>";
 			request.setAttribute("message", message);
 			request.getRequestDispatcher("pages/user/userLogin.jsp").forward(
@@ -50,17 +54,16 @@ public class UserQuery extends HttpServlet {
 			return;
 		}
 
-		String queryWord = request.getParameter("queryWord").trim();
+		// 封装页面数据 list userBean
 		try {
-			// 暂时先去查询email账号
-			List<UserBean> list = iUserDao.getUserBeanByAllCountFuzzy(queryWord,
-					Constant.USER_COUNT_EMAIL);
-
+			List<UserBean> list = iUserDao.listAllUserBean();
 			request.setAttribute("userBeanList", list);
-			request.getRequestDispatcher("pages/user/userQueryShow.jsp")
-					.forward(request, response);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
+		request.getRequestDispatcher("pages/user/userList.jsp").forward(
+				request, response);
+
 	}
 }

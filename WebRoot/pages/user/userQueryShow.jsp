@@ -1,24 +1,30 @@
 <%@page import="cn.com.yves.bean.UserBean"%>
+<%@page import="cn.com.yves.dao.UserDaoInf"%>
+<%@page import="cn.com.yves.dao.impl.UserDao"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
-<%
-	UserBean uBean = (UserBean) session.getAttribute("userBean");
-	if (uBean == null) {
-		response.sendRedirect(path + "/pages/user/userLogin.jsp");
-		//由于jsp中有java代码要先编译java代码,所以当没登录直接访问该页面时候 uBean会为null 下面代码会报空指针,所以在这里先直接new
-		//一个空的对象,防止报错.
-		uBean = new UserBean();
-	}
+	+ request.getServerName() + ":" + request.getServerPort()
+	+ path + "/";
 %>
 
 <%
-	List<UserBean> list = (List<UserBean>) session
-			.getAttribute("queryUserList");
+	//获取页面过来要显示的 操作消息
+	String message = (String)request.getAttribute("message");
+	if (message !=  null){
+		out.println(message);
+	}
+
+
+	//获取传递过来的所有数据
+	List<UserBean> list = (List<UserBean>)request.getAttribute("userBeanList");
+	UserBean selfBean = (UserBean) session.getAttribute("userBean");//该登录用户有的信息
+
+	if(selfBean == null){
+		response.sendRedirect(path+ "/pages/user/userLogin.jsp");//当直接访问该页面的时候,打回登录页面不提示
+		return;
+	}
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -26,7 +32,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>My JSP 'userQueryShow.jsp' starting page</title>
+<title>My JSP 'userList.jsp' starting page</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -36,41 +42,69 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
 </head>
 
 <body>
-	当前操作员:<%=uBean.getUserName()%>
-	<a href="userExit">安全退出</a>
+	<h1>User信息总览表</h1>
+	<h2>
+		当前操作员:<%=selfBean.getUserName()%>
+		<a href="userExit">安全退出</a>
+	</h2>
+	<form method="post" id="myForm" action="userQuery">
+		<input type="text" name="queryWord">
+		<input type="button" value="查询" onclick="query();">
+		<table border="1">
+			<tbody>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Pwd</th>
+					<th>UserPowerId</th>
+					<th>UserNickName</th>
+					<th>update</th>
+					<th>delete</th>
+				</tr>
+				<%
+					for (UserBean ub : list) {
+				%>
+				<tr>
+					<td><%=ub.getUserId()%></td>
+					<td><%=ub.getUserName()%></td>
+					<td><%=ub.getUserPwd()%></td>
+					<td><%=ub.getUserPowerId()%></td>
+					<td><%=ub.getUserNickName()%></td>
 
-	<table border="1">
-		<tbody>
-			<tr>
-				<th>Id</th>
-				<th>Name</th>
-				<th>Pwd</th>
-				<th>update</th>
-				<th>delete</th>
-			</tr>
-			<%
-				for (UserBean ub : list) {
-			%>
-			<tr>
-				<td><%=ub.getUserId()%></td>
-				<td><%=ub.getUserName()%></td>
-				<td><%=ub.getUserPwd()%></td>
-				<td><a href="userUpdate?userId=<%=ub.getUserId()%>">修改</a>
-				</td>
-				<td><a href="userDelete?userId=<%=ub.getUserId()%>">删除</a>
-				</td>
-			</tr>
-			<%
-				}
-			%>
-		</tbody>
-	</table>
+					<%
+						if(selfBean.getUserPowerId() < ub.getUserPowerId()) {
+					%>
+					<td><a href="pages/user/userUpdate.jsp?userId=<%=ub.getUserId()%>">修改</a></td>
+					<td><a href="userDelete?userId=<%=ub.getUserId()%>">删除</a>
+					</td>
+					<%
+						}else{
+					%>
+					<td>修改</td>
+					<td>删除</td>
+					<%
+						}
+					%>
 
-
-
+				</tr>
+				<%
+					}
+				%>
+			</tbody>
+		</table>
+		<a href="pages/user/userAdd.jsp">
+			<input type="button" value="添加">
+		</a>
+	</form>
 </body>
+
+<script type="text/javascript">
+	function query() {
+		//查询结果显示,POST提交
+		document.getElementById("myForm").submit();
+	}
+</script>
 </html>

@@ -11,8 +11,17 @@ public class UserBean {
 
 	private String userPwd;// 用户密码
 
-	private String userNickname;// 昵称,默认为账号名
+	private String userNickName;// 昵称,默认为账号名
 	private String userDesc; // 用户的其他信息
+	private int userPowerId;// 用户权限id 1:超级管理员 2:管理员 3: 普通用户
+
+	public int getUserPowerId() {
+		return userPowerId;
+	}
+
+	public void setUserPowerId(int userPowerId) {
+		this.userPowerId = userPowerId;
+	}
 
 	public String getUserId() {
 		return userId;
@@ -54,12 +63,12 @@ public class UserBean {
 		this.userPwd = userPwd;
 	}
 
-	public String getUserNickname() {
-		return userNickname;
+	public String getUserNickName() {
+		return userNickName;
 	}
 
-	public void setUserNickname(String userNickname) {
-		this.userNickname = userNickname;
+	public void setUserNickName(String userNickName) {
+		this.userNickName = userNickName;
 	}
 
 	public String getUserDesc() {
