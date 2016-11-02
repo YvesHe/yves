@@ -1,9 +1,7 @@
 package cn.com.yves.servlet.user;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -45,6 +43,14 @@ public class UserAdd extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		UserBean ubBean = (UserBean) session.getAttribute("userBean");
+		// 判断是否已经登录
+		if (ubBean == null) {
+			String message = "<html><head><script type='text/javascript'>alert('请先登录!');</script></head><body></body></html>";
+			request.setAttribute("message", message);
+			request.getRequestDispatcher("pages/user/userLogin.jsp").forward(
+					request, response);
+			return;
+		}
 
 		// 获取页面数据
 		String userName = request.getParameter("userName");
@@ -52,25 +58,18 @@ public class UserAdd extends HttpServlet {
 		int userPowerId = Integer.valueOf(request.getParameter("userPowerId")
 				.trim());// 输入时 1 2 3 要在前台做验证.
 
-		// 传递到页面的数据
-		List<UserBean> list;
-		try {
-			list = IUserDao.listAllUserBean();
-			request.setAttribute("userBeanList", list);
-		} catch (SQLException e2) {
-			e2.printStackTrace();
-		}
-
-		PrintWriter out = response.getWriter();
-
 		// 1.本user模块旨在让超级管理员创建删除下属的账号 所以新增的时候应该是有限制的
 
 		// 2. 判断数据库是否已经有改邮箱注册了.有就提示该用户名已经注册,新增失败
 		try {
 			if (IUserDao.validateCount(userName, Constant.USER_COUNT_EMAIL)) {// 数据中该邮箱已经注册
-				out.println("<html><head><script type='text/javascript'>alert('新增失败,该邮箱已经注册!');</script></head><body></body></html>");
-				request.getRequestDispatcher("pages/user/userList.jsp")
-						.include(request, response);
+
+				String message = "<html><head><script type='text/javascript'>alert('新增失败,该邮箱已经注册!');</script></head><body></body></html>";
+				request.setAttribute("message", message);
+				request.getRequestDispatcher("userList").forward(request,
+						response);
+				return;
+
 			} else {// 数据中无该该邮箱
 				UserBean ub = new UserBean();
 
@@ -85,12 +84,17 @@ public class UserAdd extends HttpServlet {
 
 				try {
 					if (IUserDao.addUserBean(ub)) {
-						out.println("<html><head><script type='text/javascript'>alert('新增成功!');</script></head><body></body></html>");
-						request.getRequestDispatcher("pages/user/userList.jsp")
-								.include(request, response);
+						String message = "<html><head><script type='text/javascript'>alert('新增成功!');</script></head><body></body></html>";
+						request.setAttribute("message", message);
+						request.getRequestDispatcher("userList").forward(
+								request, response);
+						return;
 					} else {
-						out.println("<html><head><script type='text/javascript'>alert('新增失败!');</script></head><body></body></html>");
-						request.getRequestDispatcher("pages/user/userList.jsp");
+						String message = "<html><head><script type='text/javascript'>alert('新增失败!');</script></head><body></body></html>";
+						request.setAttribute("message", message);
+						request.getRequestDispatcher("userList").forward(
+								request, response);
+						return;
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
