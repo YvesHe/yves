@@ -44,8 +44,7 @@ public class UploadingFile extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		// 获取在web.xml中配置的文件保存的位置
-		dirPath = getServletContext().getInitParameter("file-upload");
-
+		dirPath = this.getServletContext().getInitParameter("file-upload");// getServletContext（）方法来自GenericServlet类
 		// 方法二： 直接使用定义的路径
 		// filePath = UPLOAD_DIRECTORY;
 
