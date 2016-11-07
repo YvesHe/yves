@@ -19,23 +19,23 @@ import javax.servlet.ServletResponse;
  * 
  */
 public class FilterAll implements Filter {
-	// 网站浏览次数,所有的请求都算一次浏览 包括ajax局部刷新 和 错误我访问路径.
-	private int countView;
+    // 网站浏览次数,所有的请求都算一次浏览 包括ajax局部刷新 和 错误我访问路径.
+    private int countView;
 
-	public void init(FilterConfig filterConfig) throws ServletException {
-		countView = 0;
-	}
+    public void init(FilterConfig filterConfig) throws ServletException {
+        countView = 0;
+    }
 
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
-		System.out.println("访问次数:" + ++countView);
+    public void doFilter(ServletRequest request, ServletResponse response,
+            FilterChain chain) throws IOException, ServletException {
+        System.out.println("访问次数:" + ++countView);
 
-		// 继续传递请求?
-		chain.doFilter(request, response);
-	}
+        // 继续传递请求?
+        chain.doFilter(request, response);
+    }
 
-	// 当关闭web容器时才调用,也及时服务器关闭了.
-	public void destroy() {
-		System.out.println("fileter destroy");
-	}
+    // 当关闭web容器时才调用,也及时服务器关闭了.
+    public void destroy() {
+        System.out.println("fileter destroy");
+    }
 }

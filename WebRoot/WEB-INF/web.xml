@@ -6,8 +6,10 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+	<display-name></display-name>
 
 
+	<!--context-param配置是配置在上下文中,也就整个工程Application,相当于全局配置 -->
 	<!-- 配置文件上传的路径 -->
 	<context-param>
 		<description>Location to store uploaded file</description>
@@ -23,8 +25,13 @@
 		<param-value>Test success!</param-value>
 	</context-param>
 
-	<display-name></display-name>
 
+
+	<!-- 测试JSP object9中config.getInitParameter和servletContext.getInitParameter -->
+	<context-param>
+		<param-name>initPrarameter</param-name>
+		<param-value>initPrarameter value!</param-value>
+	</context-param>
 
 	<!-- 配置过滤器 -->
 	<filter>
