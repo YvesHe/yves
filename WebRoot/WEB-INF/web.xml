@@ -196,6 +196,55 @@
 		<servlet-name>ServletContextTest</servlet-name>
 		<servlet-class>cn.com.yves.servlet.ServletContextTest</servlet-class>
 	</servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserLoginValidate</servlet-name>
+    <servlet-class>cn.com.yves.servlet.user2.UserLoginValidate</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserAdd2</servlet-name>
+    <servlet-class>cn.com.yves.servlet.user2.UserAdd2</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserUpdate2</servlet-name>
+    <servlet-class>cn.com.yves.servlet.user2.UserUpdate2</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserList2</servlet-name>
+    <servlet-class>cn.com.yves.servlet.user2.UserList2</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserDelete2</servlet-name>
+    <servlet-class>cn.com.yves.servlet.user2.UserDelete2</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserExit2</servlet-name>
+    <servlet-class>cn.com.yves.servlet.user2.UserExit2</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserQuery2</servlet-name>
+    <servlet-class>cn.com.yves.servlet.user2.UserQuery2</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
 
 
 
@@ -317,6 +366,34 @@
 		<servlet-name>ServletContextTest</servlet-name>
 		<url-pattern>/servletContextTest</url-pattern>
 	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserLoginValidate</servlet-name>
+    <url-pattern>/userLoginValidate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserAdd2</servlet-name>
+    <url-pattern>/userAdd2</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserUpdate2</servlet-name>
+    <url-pattern>/userUpdate2</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserList2</servlet-name>
+    <url-pattern>/userList2</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserDelete2</servlet-name>
+    <url-pattern>/userDelete2</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserExit2</servlet-name>
+    <url-pattern>/userExit2</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserQuery2</servlet-name>
+    <url-pattern>/userQuery2</url-pattern>
+  </servlet-mapping>
 
 
 

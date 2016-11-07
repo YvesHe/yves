@@ -3,11 +3,7 @@
 <%@page import="cn.com.yves.dao.impl.UserDaoImpl"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-    //设置编码
-    request.setCharacterEncoding("UTF-8");
-    response.setContentType("text/html;charset=UTF-8");
-    
-	String path = request.getContextPath();
+    String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 	+ request.getServerName() + ":" + request.getServerPort()
 	+ path + "/";
@@ -52,9 +48,9 @@
 	<h1>User信息总览表</h1>
 	<h2>
 		当前操作员:<%=selfBean.getUserName()%>
-		<a href="userExit">安全退出</a>
+		<a href="userExit2">安全退出</a>
 	</h2>
-	<form method="post" id="myForm" action="userQuery">
+	<form method="post" id="myForm" action="userQuery2">
 		<input type="text" name="queryWord"> <input type="button"
 			value="查询" onclick="query();">
 		<table border="1">
@@ -82,9 +78,9 @@
 					    if(selfBean.getUserPowerId() < ub.getUserPowerId()) {
 					%>
 					<td><a
-						href="pages/user/userUpdate.jsp?userId=<%=ub.getUserId()%>">修改</a>
+						href="pages/user2/userUpdate.jsp?userId=<%=ub.getUserId()%>">修改</a>
 					</td>
-					<td><a href="userDelete?userId=<%=ub.getUserId()%>">删除</a></td>
+					<td><a href="userDelete2?userId=<%=ub.getUserId()%>">删除</a></td>
 					<%
 					    }else{
 					%>
@@ -100,7 +96,7 @@
 				%>
 			</tbody>
 		</table>
-		<a href="pages/user/userAdd.jsp"> <input type="button" value="添加">
+		<a href="pages/user2/userAdd.jsp"> <input type="button" value="添加">
 		</a>
 	</form>
 </body>

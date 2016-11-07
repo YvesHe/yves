@@ -14,7 +14,7 @@ import cn.com.yves.dao.UserDaoInf;
 import cn.com.yves.utill.DBUtill;
 import cn.com.yves.utill.ReflectUtill;
 
-public class UserDao implements UserDaoInf {
+public class UserDaoImpl implements UserDaoInf {
 
 	public List<UserBean> listAllUserBean() throws SQLException {
 		List<UserBean> list = new ArrayList<UserBean>();
