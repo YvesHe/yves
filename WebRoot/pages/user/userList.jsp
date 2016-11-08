@@ -1,8 +1,12 @@
 <%@page import="cn.com.yves.bean.UserBean"%>
 <%@page import="cn.com.yves.dao.UserDaoInf"%>
-<%@page import="cn.com.yves.dao.impl.UserDao"%>
+<%@page import="cn.com.yves.dao.impl.UserDaoImpl"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
+    //设置编码
+    request.setCharacterEncoding("UTF-8");
+    response.setContentType("text/html;charset=UTF-8");
+    
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 	+ request.getServerName() + ":" + request.getServerPort()
@@ -10,7 +14,7 @@
 %>
 
 <%
-	//获取页面过来要显示的 操作消息
+    //获取页面过来要显示的 操作消息
 	String message = (String)request.getAttribute("message");
 	if (message !=  null){
 		out.println(message);
@@ -56,8 +60,8 @@
 		<a href="userExit">安全退出</a>
 	</h2>
 	<form method="post" id="myForm" action="userQuery">
-		<input type="text" name="queryWord">
-		<input type="button" value="查询" onclick="query();">
+		<input type="text" name="queryWord"> <input type="button"
+			value="查询" onclick="query();">
 		<table border="1">
 			<tbody>
 				<tr>
@@ -70,7 +74,7 @@
 					<th>delete</th>
 				</tr>
 				<%
-					for (UserBean ub : list) {
+				    for (UserBean ub : list) {
 				%>
 				<tr>
 					<td><%=ub.getUserId()%></td>
@@ -80,28 +84,28 @@
 					<td><%=ub.getUserNickName()%></td>
 
 					<%
-						if(selfBean.getUserPowerId() < ub.getUserPowerId()) {
+					    if(selfBean.getUserPowerId() < ub.getUserPowerId()) {
 					%>
-					<td><a href="pages/user/userUpdate.jsp?userId=<%=ub.getUserId()%>">修改</a>
+					<td><a
+						href="pages/user/userUpdate.jsp?userId=<%=ub.getUserId()%>">修改</a>
 					</td>
 					<td><a href="userDelete?userId=<%=ub.getUserId()%>">删除</a></td>
 					<%
-						}else{
+					    }else{
 					%>
 					<td>修改</td>
 					<td>删除</td>
 					<%
-						}
+					    }
 					%>
 
 				</tr>
 				<%
-					}
+				    }
 				%>
 			</tbody>
 		</table>
-		<a href="pages/user/userAdd.jsp">
-			<input type="button" value="添加">
+		<a href="pages/user/userAdd.jsp"> <input type="button" value="添加">
 		</a>
 	</form>
 </body>

@@ -5,11 +5,11 @@ import java.sql.SQLException;
 import cn.com.yves.bean.UserBean;
 import cn.com.yves.constant.Constant;
 import cn.com.yves.dao.UserDaoInf;
-import cn.com.yves.dao.impl.UserDao;
+import cn.com.yves.dao.impl.UserDaoImpl;
 
 public class UserService {
 
-	private UserDaoInf uDao = new UserDao();
+	private UserDaoInf uDao = new UserDaoImpl();
 
 	public UserBean showUserInfo(String userBeanId) {
 		UserBean uBean = null;

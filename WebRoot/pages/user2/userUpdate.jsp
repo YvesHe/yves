@@ -47,7 +47,7 @@
 
 <body>
 	<h1>修改账号信息</h1>
-	<form method="post" action="userUpdate">
+	<form method="post" action="userUpdate2">
 		userId:<input name="userId" type="text" readonly="readonly" value="<%=ubBean.getUserId()%>"><br>
 		userCount:<input name="userCount" type="text" readonly="readonly" value="<%=ubBean.getUserCount()%>"><br>
 		userName:<input name="userName" type="text"  value="<%=ubBean.getUserName()%>"><br>

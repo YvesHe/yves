@@ -14,10 +14,10 @@ import javax.servlet.http.HttpSession;
 import cn.com.yves.bean.UserBean;
 import cn.com.yves.constant.Constant;
 import cn.com.yves.dao.UserDaoInf;
-import cn.com.yves.dao.impl.UserDao;
+import cn.com.yves.dao.impl.UserDaoImpl;
 
 public class UserLogin extends HttpServlet {
-	private UserDaoInf IUserDao = new UserDao();
+	private UserDaoInf IUserDao = new UserDaoImpl();
 
 	/**
 	 * The doPost method of the servlet. <br>

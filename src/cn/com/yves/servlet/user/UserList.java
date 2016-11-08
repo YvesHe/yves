@@ -12,10 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import cn.com.yves.bean.UserBean;
 import cn.com.yves.dao.UserDaoInf;
-import cn.com.yves.dao.impl.UserDao;
+import cn.com.yves.dao.impl.UserDaoImpl;
 
 public class UserList extends HttpServlet {
-	private UserDaoInf iUserDao = new UserDao();
+	private UserDaoInf iUserDao = new UserDaoImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest request,
