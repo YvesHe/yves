@@ -37,6 +37,8 @@
 17.update user set name='nihao',phonenumber='12425748544',password='nihao',nickname='heh',`desc`='hehe',powerid='2' where userid='ba33481d-c6b7-4b27-8796-ac95cc1b5443' 
 sql  语句中   `desc`为什么一定要这样写
 
+18.如何让访问的所有的无效的url都跳转到登录界面?  用过滤去过滤?
+
 
 
 

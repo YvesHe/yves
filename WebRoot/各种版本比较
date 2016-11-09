@@ -1,0 +1,24 @@
+1.存servlet版本的user  
+    缺点：前台显示也在servlet中书写,这样不利于维护.没有做到界面和后台的分离.
+    
+    
+ 纯jsp版本的  页面是在user中
+ 缺点: 在jsp中书写代码,增加解析引擎的负担.
+ 
+ 
+ 
+mvc第一版本: user2
+一个功能点一个servlet的版本.所有的操作都有一个servlet对应,使的servlet过多,工程过大,不利于维护.
+
+
+mvc第二版本:user2
+用控制层的servlet来控制service(该service的子实现,每一个模块只有一个实现子类,所有的业务逻辑都在这个serviceImpl里)
+缺点: 在控制层的里面用serviceImpl来调用业务处理方法的时候,千万不能是单一实例的,如果考到统一时刻有懂用户并发的情况,
+会加重service的负担,效果不好.
+
+
+mvc第三版:User3
+用控制层的servlet来控制service(没service 有很多个子实现,针对每一个操作一个实现,比如添加,修改...)然后采用工厂方法模式来生成
+这些service的子实现.
+缺点:  service的子实现类过多  
+优点:  方便开发与整合

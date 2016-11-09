@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cn.com.yves.bean.UserBean;
-import cn.com.yves.service.UserService;
+import cn.com.yves.service.UserServiceForServletTest;
 
 public class ShowUserServlet extends HttpServlet {
 
@@ -31,7 +31,7 @@ public class ShowUserServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 
-		UserService userService = new UserService();
+		UserServiceForServletTest userService = new UserServiceForServletTest();
 		UserBean userBean = userService.showUserInfo("1");
 		System.out.println(userBean.getUserName());
 		request.setAttribute("userBean", userBean);

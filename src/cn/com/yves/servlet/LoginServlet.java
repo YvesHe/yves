@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cn.com.yves.service.UserService;
+import cn.com.yves.service.UserServiceForServletTest;
 
 /**
  * 验证登录servlet
@@ -17,7 +17,7 @@ import cn.com.yves.service.UserService;
  * 
  */
 public class LoginServlet extends HttpServlet {
-	private UserService userService = new UserService();
+	private UserServiceForServletTest userService = new UserServiceForServletTest();
 
 	/**
 	 * 

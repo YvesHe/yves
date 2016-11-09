@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserServiceInf {
         userDao.addUserBean(uBean);
     }
 
-    // 将也买的数据封装成Bean对象
+    // 将页面的数据封装成Bean对象
     private UserBean getUserBeanDataFromJSP(HttpServletRequest request) {
         UserBean uBean = new UserBean();
         uBean.setUserCount(Constant.USER_COUNT_EMAIL);

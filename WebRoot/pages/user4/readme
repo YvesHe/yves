@@ -1,0 +1,2 @@
+这里面所有的页面都是给:
+一个service 多个service子实现版本来用的.  然后service的子实现采用的是工厂方法模式来来create 子service.

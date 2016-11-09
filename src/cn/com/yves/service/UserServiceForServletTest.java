@@ -7,7 +7,7 @@ import cn.com.yves.constant.Constant;
 import cn.com.yves.dao.UserDaoInf;
 import cn.com.yves.dao.impl.UserDaoImpl;
 
-public class UserService {
+public class UserServiceForServletTest {
 
 	private UserDaoInf uDao = new UserDaoImpl();
 

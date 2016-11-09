@@ -1,35 +1,26 @@
 <%@page import="cn.com.yves.bean.UserBean"%>
 <%@page import="cn.com.yves.dao.UserDaoInf"%>
 <%@page import="cn.com.yves.dao.impl.UserDaoImpl"%>
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<!-- 设置 errorPage属性,当页面出错时的跳转页面为noLogin.jsp-->
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"
+	errorPage="../errorPage/noLogin.jsp"%>
 <%
-	String path = request.getContextPath();
+    String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 	+ request.getServerName() + ":" + request.getServerPort()
 	+ path + "/";
 %>
 
 <%
-	//获取页面过来要显示的 操作消息
-	String message = (String)request.getAttribute("message");
-	if (message !=  null){
-		out.println(message);
-	}
-
-	//仅仅用于测试
-	if(session.isNew()){
-		//当打开浏览器访问该站点第一个网站开始的session才是新的   isNew与session是否是失效无关.
-		System.out.println("session is New !");
-	}
-		
-	//获取传递过来的所有数据
+    //获取传递过来的所有数据
 	List<UserBean> list = (List<UserBean>)request.getAttribute("userBeanList");
 	UserBean selfBean = (UserBean) session.getAttribute("userBean");//该登录用户有的信息
 
-	if(selfBean == null){
-		response.sendRedirect(path+ "/pages/user2/userLogin.jsp");//当直接访问该页面的时候,打回登录页面不提示
-		return;
-	}
+//注意: 设置了页面出错后的跳转后,就不要担心用户刻意直接访问该页面会报错了,因为会直接将页面跳转到设置的出错页面
+	//if(selfBean == null){
+	//	response.sendRedirect(path+ "/pages/user2/userLogin.jsp");
+	//	return;
+	//}
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -53,11 +44,11 @@
 	<h1>User信息总览表</h1>
 	<h2>
 		当前操作员:<%=selfBean.getUserName()%>
-		<a href="userExit2">安全退出</a>
+		<a href="userControl?service=exit">安全退出</a>
 	</h2>
-	<form method="post" id="myForm" action="userQuery2">
-		<input type="text" name="queryWord">
-		<input type="button" value="查询" onclick="query();">
+	<form method="post" id="myForm" action="userControl?service=userQuery">
+		<input type="text" name="queryWord"> <input type="button"
+			value="查询" onclick="query();">
 		<table border="1">
 			<tbody>
 				<tr>
@@ -70,7 +61,7 @@
 					<th>delete</th>
 				</tr>
 				<%
-					for (UserBean ub : list) {
+				    for (UserBean ub : list) {
 				%>
 				<tr>
 					<td><%=ub.getUserId()%></td>
@@ -80,28 +71,30 @@
 					<td><%=ub.getUserNickName()%></td>
 
 					<%
-						if(selfBean.getUserPowerId() < ub.getUserPowerId()) {
+					    if(selfBean.getUserPowerId() < ub.getUserPowerId()) {
 					%>
-					<td><a href="pages/user2/userUpdate.jsp?userId=<%=ub.getUserId()%>">修改</a>
+					<td><a
+						href="pages/user4/userUpdate.jsp?userId=<%=ub.getUserId()%>">修改</a>
 					</td>
-					<td><a href="userDelete2?userId=<%=ub.getUserId()%>">删除</a></td>
+					<td><a
+						href="userControl?service=userDel&userId=<%=ub.getUserId()%>">删除</a>
+					</td>
 					<%
-						}else{
+					    }else{
 					%>
 					<td>修改</td>
 					<td>删除</td>
 					<%
-						}
+					    }
 					%>
 
 				</tr>
 				<%
-					}
+				    }
 				%>
 			</tbody>
 		</table>
-		<a href="pages/user4/userAdd.jsp">
-			<input type="button" value="添加">
+		<a href="pages/user4/userAdd.jsp"> <input type="button" value="添加">
 		</a>
 	</form>
 </body>
