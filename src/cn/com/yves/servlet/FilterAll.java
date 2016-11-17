@@ -1,6 +1,7 @@
 package cn.com.yves.servlet;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -20,27 +21,40 @@ import javax.servlet.ServletResponse;
  * 
  */
 public class FilterAll implements Filter {
+
     // 网站浏览次数,所有的请求都算一次浏览 包括ajax局部刷新 和 错误我访问路径.
     private int countView;
 
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) throws ServletException {/*
+                                                                          * 过滤器初始化时,
+                                                                          * 容器自动调用该方法
+                                                                          */
         System.out.println("过滤器初始化!");
+
+        String pValue = filterConfig.getInitParameter("filterParameter"); // 获取初始化参数,获取在web.xml中该filter配置的初始化参数
 
         countView = 0;
     }
 
+    /**
+     * 对满足该filter条件的请求,没访问一次都会先进入该方法后在进Servlet
+     */
     public void doFilter(ServletRequest request, ServletResponse response,
-            FilterChain chain) throws IOException, ServletException {
+            FilterChain chain) throws IOException, ServletException { /* 在这里做过滤器要做的业务 */
+
         System.out.println("过滤器在doFilter");
 
         System.out.println("访问次数:" + ++countView);
 
-        // 继续传递请求?
+        String ipAddress = request.getRemoteAddr(); // 获取客户端ip地址
+        System.out.println("IP " + ipAddress + ", Time "
+                + new Date().toString()); // 输出ip地址及当前时间
+
+        // 传递请求到过滤器链,继续下一个过滤器
         chain.doFilter(request, response);
     }
 
-    // 当关闭web容器时才调用,也及时服务器关闭了.
-    public void destroy() {
+    public void destroy() { /* 在Filter实例在服务器上被移除前调用。 */
         System.out.println("过滤器 销毁了!");
     }
 }

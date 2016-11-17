@@ -1,0 +1,7 @@
+这是对EL表达式的练习部分.
+
+
+分别从   pageScope  ,requestScope，sessionScope，applicationScope,   param,  paramValues 中获取值。
+
+
+EL中4个隐式作用域通信对象和两个常用对象  param  paramValues

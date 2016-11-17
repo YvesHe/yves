@@ -3,47 +3,97 @@
 	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
-	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
-	<display-name></display-name>
+
+	<!-- 配置工程名 -->
+	<display-name>yves2</display-name>
 
 
-	<!--context-param配置是配置在上下文中,也就整个工程Application,相当于全局配置 -->
-	<!-- 配置文件上传的路径 -->
-	<context-param>
+	<!-- 全局配置 : 也就是配置在上下文中servletContext,也就整个工程application,在Servlet中用ServletContext()的对象获取initParameter -->
+	<context-param><!-- 配置文件上传的路径 -->
 		<description>Location to store uploaded file</description>
 		<param-name>file-upload</param-name>
 		<param-value>
-			E:\git\yves\WebRoot\files\uploadFile\
-	     </param-value>
+            D:\git\yves\WebRoot\files\uploadFile\
+         </param-value>
 	</context-param>
-
-	<!-- 测试servletContextTestServlet获得ServletContext -->
-	<context-param>
+	<context-param> <!-- 测试servletContextTestServlet获得ServletContext -->
 		<param-name>servletContextTestParameter</param-name>
 		<param-value>Test success!</param-value>
 	</context-param>
-
-
-
-	<!-- 测试JSP object9中config.getInitParameter和servletContext.getInitParameter -->
-	<context-param>
+	<context-param>    <!-- 测试JSP object9中config.getInitParameter和servletContext.getInitParameter -->
 		<param-name>initPrarameter</param-name>
 		<param-value>initPrarameter value!</param-value>
 	</context-param>
 
-	<!-- 配置过滤器: 注意: 过滤器一定要配置在servlet的前面 -->
+
+	<!-- 配置过滤器: 注意:过滤器一定要配置在servlet的前面 ,配置多个filter时先配置先dofilter -->
 	<filter>
 		<filter-name>FilterAll</filter-name>
 		<filter-class>cn.com.yves.servlet.FilterAll</filter-class>
+		<init-param><!-- 配置该filter的初始化参数 -->
+			<param-name>filterParameter</param-name>
+			<param-value>this filter's value</param-value>
+		</init-param>
 	</filter>
 	<filter-mapping>
 		<filter-name>FilterAll</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+	<filter>
+		<filter-name>FilterAll2</filter-name>
+		<filter-class>cn.com.yves.servlet.FilterAll2</filter-class>
+		<init-param><!-- 配置该filter的初始化参数 -->
+			<param-name>filterParameter</param-name>
+			<param-value>this filter's value</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>FilterAll2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
+
+
+	<!-- 配置标签库: (如果项目中使用到标签库就要配置,也可以配置所有的tld,taglib-location为tld文件所在的本地位置): -->
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jstl/fmt</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/fmt.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jstl/fmt-rt</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/fmt-rt.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jstl/core</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/c.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jstl/core-rt</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/c-rt.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jstl/sql</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/sql.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jstl/sql-rt</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/sql-rt.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jstl/x</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/x.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jstl/x-rt</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/x-rt.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+
+
+
+	<!-- 配置Servlet: 在spring mvc 中可以只配置一个springmvc的Servlet,其他的交给spring mvc 来处理 -->
 	<servlet>
 		<description>This is the description of my J2EE component</description>
 		<display-name>This is the display name of my J2EE component</display-name>
@@ -92,21 +142,18 @@
 		<servlet-name>UploadingFile</servlet-name>
 		<servlet-class>cn.com.yves.servlet.UploadingFile</servlet-class>
 	</servlet>
-
-	<!-- 文件下载的Servlet -->
-	<servlet>
+	<servlet><!-- 文件下载的Servlet -->
 		<description>This is the description of my J2EE component</description>
 		<display-name>This is the display name of my J2EE component</display-name>
 		<servlet-name>DownloadFile</servlet-name>
 		<servlet-class>cn.com.yves.servlet.DownloadFile</servlet-class>
-		<!-- 当Servlet加载的时候init-param用来初始化参数 -->
-		<init-param>
+		<init-param><!-- 当Servlet加载的时候init-param用来初始化参数 -->
 			<param-name>contentType</param-name>
 			<param-value>application/x-msdownload</param-value>
 		</init-param>
 		<init-param>
 			<param-name>downPath</param-name>
-			<param-value>E:\git\yves\WebRoot\files\DownloadFile\</param-value>
+			<param-value>D:\git\yves\WebRoot\files\DownloadFile\</param-value>
 		</init-param>
 		<init-param>
 			<param-name>encoding</param-name>
@@ -203,81 +250,54 @@
 		<servlet-name>ServletContextTest</servlet-name>
 		<servlet-class>cn.com.yves.servlet.ServletContextTest</servlet-class>
 	</servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>UserLoginValidate</servlet-name>
-    <servlet-class>cn.com.yves.servlet.user2.UserLoginValidate</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>UserAdd2</servlet-name>
-    <servlet-class>cn.com.yves.servlet.user2.UserAdd2</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>UserUpdate2</servlet-name>
-    <servlet-class>cn.com.yves.servlet.user2.UserUpdate2</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>UserList2</servlet-name>
-    <servlet-class>cn.com.yves.servlet.user2.UserList2</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>UserDelete2</servlet-name>
-    <servlet-class>cn.com.yves.servlet.user2.UserDelete2</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>UserExit2</servlet-name>
-    <servlet-class>cn.com.yves.servlet.user2.UserExit2</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>UserQuery2</servlet-name>
-    <servlet-class>cn.com.yves.servlet.user2.UserQuery2</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>UserControl</servlet-name>
-    <servlet-class>cn.com.yves.servlet.user4.UserControl</servlet-class>
-  </servlet>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>UserLoginValidate</servlet-name>
+		<servlet-class>cn.com.yves.servlet.user2.UserLoginValidate</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>UserAdd2</servlet-name>
+		<servlet-class>cn.com.yves.servlet.user2.UserAdd2</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>UserUpdate2</servlet-name>
+		<servlet-class>cn.com.yves.servlet.user2.UserUpdate2</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>UserList2</servlet-name>
+		<servlet-class>cn.com.yves.servlet.user2.UserList2</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>UserDelete2</servlet-name>
+		<servlet-class>cn.com.yves.servlet.user2.UserDelete2</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>UserExit2</servlet-name>
+		<servlet-class>cn.com.yves.servlet.user2.UserExit2</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>UserQuery2</servlet-name>
+		<servlet-class>cn.com.yves.servlet.user2.UserQuery2</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>UserControl</servlet-name>
+		<servlet-class>cn.com.yves.servlet.user4.UserControl</servlet-class>
+	</servlet>
 
 
 
@@ -380,41 +400,147 @@
 		<servlet-name>ServletContextTest</servlet-name>
 		<url-pattern>/servletContextTest</url-pattern>
 	</servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>UserLoginValidate</servlet-name>
-    <url-pattern>/userLoginValidate</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>UserAdd2</servlet-name>
-    <url-pattern>/userAdd2</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>UserUpdate2</servlet-name>
-    <url-pattern>/userUpdate2</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>UserList2</servlet-name>
-    <url-pattern>/userList2</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>UserDelete2</servlet-name>
-    <url-pattern>/userDelete2</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>UserExit2</servlet-name>
-    <url-pattern>/userExit2</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>UserQuery2</servlet-name>
-    <url-pattern>/userQuery2</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>UserControl</servlet-name>
-    <url-pattern>/userControl</url-pattern>
-  </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UserLoginValidate</servlet-name>
+		<url-pattern>/userLoginValidate</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UserAdd2</servlet-name>
+		<url-pattern>/userAdd2</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UserUpdate2</servlet-name>
+		<url-pattern>/userUpdate2</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UserList2</servlet-name>
+		<url-pattern>/userList2</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UserDelete2</servlet-name>
+		<url-pattern>/userDelete2</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UserExit2</servlet-name>
+		<url-pattern>/userExit2</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UserQuery2</servlet-name>
+		<url-pattern>/userQuery2</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UserControl</servlet-name>
+		<url-pattern>/userControl</url-pattern>
+	</servlet-mapping>
+
+	<!-- 配置监听器: -->
+	<!--
+	<listener>
+		<listener-class>cn.com.yves.listenAll</listener-class>
+	</listener>
+	-->
 
 
+	<!-- 配置session失效时间: 单位是分钟 -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
 
 
+	<!-- 配置欢迎页面 -->
+	<welcome-file-list> <!-- 从list里面一个一个找,找到就跳过下面的welcome-file ,不一定是页面,业可以是action;list里面的绝对路径和相对路径都是从webRoot起 -->
+		<welcome-file>/welcome.jsp</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+
+	<!-- 配置errorPage 注意: / 一定要,不要回报错 -->
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/pages/errorPage/error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/pages/errorPage/404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/pages/errorPage/500.jsp</location>
+	</error-page>
+
+
+	<!-- 配置mime-mapping : 浏览器会根据配置的类型自动调用相应的程序打开 ,比如用word打开doc文件 -->
+	<mime-mapping>
+		<extension>doc</extension>
+		<mime-type>application/vnd.ms-word</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>gif</extension>
+		<mime-type>image/gif</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>htm</extension>
+		<mime-type>text/html</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>html</extension>
+		<mime-type>text/html</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>jnlp</extension>
+		<mime-type>application/x-java-jnlp-file</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>jpeg</extension>
+		<mime-type>image/jpeg</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>jpg</extension>
+		<mime-type>image/jpeg</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>js</extension>
+		<mime-type>application/x-javascript</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>pdf</extension>
+		<mime-type>application/pdf</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>png</extension>
+		<mime-type>image/png</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>rar</extension>
+		<mime-type>application/x-rar-compressed</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>txt</extension>
+		<mime-type>text/plain</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>xls</extension>
+		<mime-type>application/vnd.ms-excel</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>xml</extension>
+		<mime-type>text/xml</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>xul</extension>
+		<mime-type>application/vnd.mozilla.xul-xml</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>zhtml</extension>
+		<mime-type>text/html</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>zip</extension>
+		<mime-type>application/x-zip</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>zul</extension>
+		<mime-type>text/html</mime-type>
+	</mime-mapping>
 
 </web-app>
