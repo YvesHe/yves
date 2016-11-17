@@ -5,7 +5,7 @@
 	version="2.5">
 
 	<!-- 配置工程名 -->
-	<display-name>yves2</display-name>
+	<display-name>yves</display-name>
 
 
 	<!-- 全局配置 : 也就是配置在上下文中servletContext,也就整个工程application,在Servlet中用ServletContext()的对象获取initParameter -->
@@ -434,11 +434,7 @@
 	</servlet-mapping>
 
 	<!-- 配置监听器: -->
-	<!--
-	<listener>
-		<listener-class>cn.com.yves.listenAll</listener-class>
-	</listener>
-	-->
+	<!-- <listener> <listener-class>cn.com.yves.listenAll</listener-class> </listener> -->
 
 
 	<!-- 配置session失效时间: 单位是分钟 -->
@@ -454,17 +450,17 @@
 	</welcome-file-list>
 
 
-	<!-- 配置errorPage 注意: / 一定要,不要回报错 -->
-	<error-page>
+	<!-- 配置errorPage 注意: 斜杠'/' 一定要,不要回报错 -->
+	<error-page><!-- 只要访问服务器时候出现属于Throwable的异常就会显示error.jsp -->
 		<exception-type>java.lang.Throwable</exception-type>
 		<location>/pages/errorPage/error.jsp</location>
 	</error-page>
 	<error-page>
-		<error-code>404</error-code>
+		<error-code>404</error-code><!-- 只要访问服务器不存在的请求,状态也就为404:就会显示404.jsp -->
 		<location>/pages/errorPage/404.jsp</location>
 	</error-page>
 	<error-page>
-		<error-code>500</error-code>
+		<error-code>500</error-code><!-- 只要访问服务器返回的状态码为500 就会显示500.jsp -->
 		<location>/pages/errorPage/500.jsp</location>
 	</error-page>
 

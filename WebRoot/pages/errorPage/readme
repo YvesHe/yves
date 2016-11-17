@@ -1,0 +1,1 @@
+直接访问:http://localhost:8080/yves/pages/errorPage/ThrowException.jsp 可以触发一个异常  让项目跳转到  error.jsp
