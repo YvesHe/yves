@@ -26,10 +26,10 @@
 	</context-param>
 
 
-	<!-- 配置过滤器: 注意:过滤器一定要配置在servlet的前面 ,配置多个filter时先配置先dofilter -->
+	<!-- 配置过滤器: 注意:过滤器一定要配置在servlet的前面 ,配置多个filter时先配置先dofilter,顺序是根据filter-mapping的配置顺序 -->
 	<filter>
 		<filter-name>FilterAll</filter-name>
-		<filter-class>cn.com.yves.servlet.FilterAll</filter-class>
+		<filter-class>cn.com.yves.filter.FilterAll</filter-class>
 		<init-param><!-- 配置该filter的初始化参数 -->
 			<param-name>filterParameter</param-name>
 			<param-value>this filter's value</param-value>
@@ -42,10 +42,14 @@
 
 	<filter>
 		<filter-name>FilterAll2</filter-name>
-		<filter-class>cn.com.yves.servlet.FilterAll2</filter-class>
+		<filter-class>cn.com.yves.filter.FilterAll2</filter-class>
 		<init-param><!-- 配置该filter的初始化参数 -->
-			<param-name>filterParameter</param-name>
-			<param-value>this filter's value</param-value>
+			<param-name>requestEncoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param><!-- 配置该filter的初始化参数 -->
+			<param-name>responseEncoding</param-name>
+			<param-value>text/html;charset=UTF-8</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>

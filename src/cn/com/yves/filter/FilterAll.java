@@ -1,4 +1,4 @@
-package cn.com.yves.servlet;
+package cn.com.yves.filter;
 
 import java.io.IOException;
 import java.util.Date;
@@ -9,6 +9,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 //配置过滤器: 注意: 过滤器一定要配置在servlet的前面
 /**
@@ -42,6 +43,10 @@ public class FilterAll implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain) throws IOException, ServletException { /* 在这里做过滤器要做的业务 */
 
+        // 注意: 如果能确保项目是基于http协议的可以将ServletRequest 强转成
+        // HttpServletRequest类访问实例的方法;ServletResponse类推
+        ((HttpServletRequest) request).getRequestURI();
+
         System.out.println("过滤器在doFilter");
 
         System.out.println("访问次数:" + ++countView);
@@ -50,7 +55,7 @@ public class FilterAll implements Filter {
         System.out.println("IP " + ipAddress + ", Time "
                 + new Date().toString()); // 输出ip地址及当前时间
 
-        // 传递请求到过滤器链,继续下一个过滤器
+        // 传递请求到过滤器链,继续下一个过滤器,如果后面没有过滤器了就会 去请求web资源
         chain.doFilter(request, response);
     }
 
