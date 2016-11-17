@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+//配置过滤器: 注意: 过滤器一定要配置在servlet的前面
 /**
  * 当web容器启动的时候，就会自动调用init(FilterConfig
  * arg0)来对filter进行初始化，当关闭web容器，关机，或者reload整个应用时
@@ -23,11 +24,15 @@ public class FilterAll implements Filter {
     private int countView;
 
     public void init(FilterConfig filterConfig) throws ServletException {
+        System.out.println("过滤器初始化!");
+
         countView = 0;
     }
 
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain) throws IOException, ServletException {
+        System.out.println("过滤器在doFilter");
+
         System.out.println("访问次数:" + ++countView);
 
         // 继续传递请求?
@@ -36,6 +41,6 @@ public class FilterAll implements Filter {
 
     // 当关闭web容器时才调用,也及时服务器关闭了.
     public void destroy() {
-        System.out.println("fileter destroy");
+        System.out.println("过滤器 销毁了!");
     }
 }

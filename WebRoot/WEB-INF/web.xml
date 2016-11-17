@@ -33,7 +33,7 @@
 		<param-value>initPrarameter value!</param-value>
 	</context-param>
 
-	<!-- 配置过滤器 -->
+	<!-- 配置过滤器: 注意: 过滤器一定要配置在servlet的前面 -->
 	<filter>
 		<filter-name>FilterAll</filter-name>
 		<filter-class>cn.com.yves.servlet.FilterAll</filter-class>
