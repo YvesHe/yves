@@ -38,6 +38,8 @@
 	<filter-mapping>
 		<filter-name>FilterAll</filter-name>
 		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher><!-- 配置哪些请求要进过滤器;不配置dispatcher标签默认是request请求进过滤. -->
+		<dispatcher>FORWARD</dispatcher><!-- 这个例子里面配了两个dispatcher,也就是这两种请求会进过滤器:浏览器的的请求和通过request的forward转发的请求会进过滤器 -->
 	</filter-mapping>
 
 	<filter>
