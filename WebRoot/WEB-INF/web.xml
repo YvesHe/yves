@@ -457,7 +457,7 @@
 
 	<!-- 配置session失效时间: 单位是分钟 -->
 	<session-config>
-		<session-timeout>1</session-timeout>
+		<session-timeout>30</session-timeout>
 	</session-config>
 
 
