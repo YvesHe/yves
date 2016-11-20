@@ -439,13 +439,25 @@
 		<url-pattern>/userControl</url-pattern>
 	</servlet-mapping>
 
-	<!-- 配置监听器: -->
-	<!-- <listener> <listener-class>cn.com.yves.listenAll</listener-class> </listener> -->
+	<!-- 配置监听器: HttpSessionBindingListener该类不需要在web.xml中配置 -->
+	<listener><!-- 配置监听类,然后虚拟机通过反射的方式 回调该类的方法 -->
+		<listener-class>cn.com.yves.listen.session.SessionListen</listener-class>
+	</listener>
+	<listener>
+		<listener-class>cn.com.yves.listen.session.SessionAttributeListen</listener-class>
+	</listener>
+	<listener>
+		<listener-class>cn.com.yves.listen.session.SessionBindingListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>cn.com.yves.listen.session.SessionActivationListener</listener-class>
+	</listener>
+
 
 
 	<!-- 配置session失效时间: 单位是分钟 -->
 	<session-config>
-		<session-timeout>30</session-timeout>
+		<session-timeout>1</session-timeout>
 	</session-config>
 
 
