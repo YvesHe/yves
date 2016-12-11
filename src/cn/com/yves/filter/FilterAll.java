@@ -11,11 +11,16 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-//配置过滤器: 注意: 过滤器一定要配置在servlet的前面
+//servlet filter listener加载顺序与它们在 web.xml 文件中的先后顺序无关。
+//最终加载顺序为: listener -> filter -> servlet
+//但是某类配置节而言，与它们出现的顺序有关,比如: filter 与filter-mapping 配置节出现的顺序来依次调用 doFilter()方法的,其他类似.
 /**
- * 当web容器启动的时候，就会自动调用init(FilterConfig
- * arg0)来对filter进行初始化，当关闭web容器，关机，或者reload整个应用时
- * ，都会调用destroy()来关闭filter。也就是说，当web容器启动时，filter就被加载到内存，并在destroy()调用之前都常驻内存。
+ * 当web容器启动的时候，就会自动调用init(FilterConfig arg0)来对filter进行初始化
+ * 
+ * 当关闭web容器，关机，或者reload整个应用时 ，都会调用destroy()来关闭filter。
+ * 
+ * 也就是说，当web容器启动时，filter就被加载到内存，并在destroy()调用之前都常驻内存。
+ * 
  * 总之:servlet filter listener 都是单例的，就是说在运行时只存在一个实例。
  * 
  * @author Yves He
@@ -38,7 +43,7 @@ public class FilterAll implements Filter {
     }
 
     /**
-     * 对满足该filter条件的请求,没访问一次都会先进入该方法后在进Servlet
+     * 对满足该filter条件的请求,每访问一次都会先进入该方法后在进Servlet
      */
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain) throws IOException, ServletException { /* 在这里做过滤器要做的业务 */
