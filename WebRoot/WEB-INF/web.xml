@@ -38,6 +38,9 @@
 	<filter-mapping>
 		<filter-name>FilterAll</filter-name>
 		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher><!-- dispatcher标记是来定制哪些请求要进这个过滤器, 当没有改标记的时候,默认是request请求,也就是从浏览器的访问 -->
+		<dispatcher>FORWARD</dispatcher><!-- 配置了这个两个dispatcher 后的意思是:如果请求是以/* 开头的，并且是通过request 
+			dispatcher的forward方法传递过来或者直接从客户端传递过来的，则必须经过这个过滤器。 -->
 	</filter-mapping>
 
 	<filter>
